@@ -1,0 +1,32 @@
+
+.progressBar {
+    width: 80%;
+    max-width: 400px;
+    background-color: transparent;
+    border: 3px solid lightGrey;
+    height: 2em;
+    border-radius: 1.2em;
+    position: relative;
+}
+
+.progressBar::before {
+    content: ' ';
+    position: absolute;
+    /* left: 1em; */
+    height: 100%;
+    /* top: 0.4em; */
+    background: pink;
+    border-radius: 1.2em;
+    max-width: calc(500px - 2em);
+    width: var(--timer);
+}
+
+.progressBar::after {
+    content: attr(data-label);
+    /* color: white; */
+    display: flex;
+    position: absolute;
+    margin-left: auto;
+    left: 50%;
+    top: 0.3em;
+}

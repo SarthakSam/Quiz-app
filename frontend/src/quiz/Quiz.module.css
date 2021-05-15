@@ -1,0 +1,25 @@
+.quiz {
+    background: #050533;
+    height: 100vh;
+}
+
+.quizTitle {
+    color: #e6e1e133;
+}
+
+.question {
+    color: var(--color-dull-white);
+    font-size: 2.2rem;
+}
+
+.questionNo {
+    color: var(--color-white);
+    /* opacity: 0.9; */
+    font-size: 2.6rem;
+}
+
+.totalQuestions {
+    color: grey;
+    font-weight: 600;
+}
+
