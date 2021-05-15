@@ -1,12 +1,19 @@
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
-import { IQuestion, IQuizState, IAnswerStatus } from "../../quiz.types";
+import { IQuestion, IAnswerStatus, IOption } from "../../quiz.types";
 import styles from './Question.module.css';
+import { CheckAnswer } from '../../actions';
+import { UseQuiz } from '../../quiz-store/quiz.context';
 
 export function Question( { question: questionObj, status = "Not Answered" }: { question: IQuestion, status: IAnswerStatus } ) {
+    const { dispatch } = UseQuiz();
 
     const iconStyle = {
-        background: 'white', borderRadius: '50%', fontSize: '1.5rem'
+        background: 'white', borderRadius: '50%', fontSize: '1.5rem', marginTop: '0.1em' 
+    }
+
+    const optionSelected = (option: IOption) => {
+        dispatch( new CheckAnswer({ option, points: questionObj.points, negativePoints: questionObj.negativePoints }) );
     }
 
     return (
@@ -15,7 +22,7 @@ export function Question( { question: questionObj, status = "Not Answered" }: { 
             <ul className="row">
                 {
                     questionObj.options.map( option => 
-                    <li className={ `row col-12 ${ styles.option }` }>
+                    <li className={ `row col-12 ${ styles.option }` } onClick = { () => { optionSelected(option) } }>
                         <p className="col-10">{ option.name }</p>
                         <div className="col-2"> 
                         {

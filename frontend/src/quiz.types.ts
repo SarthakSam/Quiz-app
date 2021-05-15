@@ -1,9 +1,11 @@
 export type IOption = {
+    _id: string;
     name: string;
     isCorrect: boolean;
 }
 
 export type IQuestion = {
+    _id: string;
     question: string;
     options: IOption[];
     points: number;
