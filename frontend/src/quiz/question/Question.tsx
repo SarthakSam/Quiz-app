@@ -5,6 +5,7 @@ import styles from './Question.module.css';
 import { CheckAnswer } from '../../quiz-store/quiz.reducer';
 import { UseQuiz } from '../../quiz-store/quiz.context';
 import { useState } from 'react';
+import { Timer } from '../timer/Timer';
 
 export function Question( { question: questionObj, status = "Not Answered" }: { question: IQuestion, status: IAnswerStatus } ) {
     const { dispatch } = UseQuiz();
@@ -25,6 +26,7 @@ export function Question( { question: questionObj, status = "Not Answered" }: { 
 
     return (
         <div>
+            <Timer time = { 20 } key = { questionObj._id } />
             <h2 className={ styles.question } >{ questionObj.question }</h2>
             <ul className="row" style={{ margin: '2em 0' }}>
                 {

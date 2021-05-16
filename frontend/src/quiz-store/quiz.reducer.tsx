@@ -4,10 +4,18 @@ import { IQuizState } from '../quiz.types';
 // type NextQuestion = { type: "NEXT_QUESTION" };
 
 type Action =
+| SetTotalQuestions
 | CheckAnswer
 | NextQuestion
 | ResetQuiz;
 
+export class SetTotalQuestions {
+    type: string;
+    constructor(public payload: number) {
+        this.type = 'SET_TOTAL_QUESTIONS';
+        this.payload = payload;
+    }
+}
 export class CheckAnswer {
     type: string;
     constructor(public payload: any) {
@@ -30,6 +38,7 @@ export class ResetQuiz {
 }
 
 export const initialState: IQuizState = {
+    totalQuestions: 0,
     currentQuestion: 0,
     answerStatus: [],
     score: 0
@@ -37,6 +46,7 @@ export const initialState: IQuizState = {
 
 export function quizReducer(state: IQuizState, action: Action) {
     switch( action.type ) {
+        case 'SET_TOTAL_QUESTIONS': return { ...state, totalQuestions: action.payload };
         case 'CHECK_ANSWER': return checkAnswer(state, action);
         case 'NEXT_QUESTION': return nextQuestion(state, action);
         case 'RESET_QUIZ': return { ...initialState };
@@ -58,7 +68,7 @@ function checkAnswer(state: IQuizState, action: Action): IQuizState {
 function nextQuestion(state: IQuizState, action: Action): IQuizState {
     return {
         ...state, 
-        currentQuestion: state.currentQuestion + 1,
+        currentQuestion: state.currentQuestion + 1 === state.totalQuestions? state.currentQuestion : state.currentQuestion + 1,
         answerStatus: state.answerStatus.length === state.currentQuestion? [...state.answerStatus, "Not Answered"]: [...state.answerStatus]
     }
 }
