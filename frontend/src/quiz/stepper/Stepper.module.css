@@ -1,0 +1,19 @@
+.bar {
+    width: 1em;
+    height: 2px;
+    background: grey;
+    margin: 1em 4px;
+    list-style: none;
+}
+
+.correct {
+    background: var(--color-app-blue);
+}
+
+.wrong {
+    background: var(--color-red);
+}
+
+.current {
+    background: white;
+} 

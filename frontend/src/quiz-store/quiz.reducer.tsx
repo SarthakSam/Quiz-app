@@ -38,17 +38,27 @@ export const initialState: IQuizState = {
 export function quizReducer(state: IQuizState, action: Action) {
     switch( action.type ) {
         case 'CHECK_ANSWER': return checkAnswer(state, action);
-        case 'NEXT_QUESTION': return { ...state, currentQuestion: state.currentQuestion + 1 };
+        case 'NEXT_QUESTION': return nextQuestion(state, action);
         case 'RESET_QUIZ': return { ...initialState };
         default:            return state;
     }
 }
 
 function checkAnswer(state: IQuizState, action: Action): IQuizState {
+    if( state.answerStatus.length !== state.currentQuestion )
+        return state;
     const negativePoints = action.payload.negativePoints? action.payload.negativePoints : 0;
     const pointsScored = action.payload.option.isCorrect? action.payload.points : negativePoints;
     return  { ...state, 
             answerStatus: [...state.answerStatus, action.payload.option.isCorrect? 'Correct':'Incorrect'],
             score: state.score + pointsScored
             };
+}
+
+function nextQuestion(state: IQuizState, action: Action): IQuizState {
+    return {
+        ...state, 
+        currentQuestion: state.currentQuestion + 1,
+        answerStatus: state.answerStatus.length === state.currentQuestion? [...state.answerStatus, "Not Answered"]: [...state.answerStatus]
+    }
 }

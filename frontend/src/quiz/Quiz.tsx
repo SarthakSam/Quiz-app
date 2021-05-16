@@ -5,7 +5,7 @@ import { FaPowerOff } from 'react-icons/fa';
 import { quiz } from '../mock.data';
 import { IQuiz } from '../quiz.types';
 import styles from './Quiz.module.css';
-import { ProgressBar } from './progress-bar/ProgressBar';
+import { Stepper } from './stepper/Stepper';
 import { Question } from './question/Question';
 import { UseQuiz } from '../quiz-store/quiz.context';
 import { NextQuestion, ResetQuiz } from '../quiz-store/quiz.reducer';
@@ -46,7 +46,7 @@ export function Quiz() {
            <div className="col-sm-12">
               <h2 className={styles.quizTitle}>{ quiz.title }</h2>
               <h1 className={styles.question}>Question <span className={styles.questionNo}>{ currentQuestion + 1 }</span> <span className={styles.totalQuestions}> / { quiz.questions.length }</span> </h1>
-              <ProgressBar/>
+              <Stepper questions={ quiz.questions.length } answerStatus={answerStatus} currentQuestion = { currentQuestion } />
               <Question  question = { quiz.questions[currentQuestion] } status = { answerStatus[currentQuestion] } />
               <div className="row">
                 <button className={`btn col-6 ${styles.quitBtn}`} onClick={ quitQuiz } > <FaPowerOff fill="grey" style={{ fontSize: '1rem' }}/> Quit Quiz</button>
