@@ -21,3 +21,11 @@
     height: 1.5em;
     width: 1.5em;
 }
+
+.correct {
+    border: 2.5px solid var(--color-app-blue);
+}
+
+.incorrect {
+    border: 2.5px solid var(--color-red);
+}

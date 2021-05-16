@@ -57,7 +57,7 @@ export const quiz: IQuiz = {
             points: 3,
             options: [
                 {
-                    _id: 'option3',
+                    _id: 'option1',
                     name: 'Grand Zeno',
                     isCorrect: true
                 },
