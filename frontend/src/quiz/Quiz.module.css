@@ -1,5 +1,5 @@
 .quiz {
-    background: #050533;
+    background-image: var(--blue-background1);
     height: 100vh;
 }
 

@@ -1,0 +1,13 @@
+.result {
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    background-image: var(--blue-background1);
+    /* justify-content: space-around; */
+}
+
+.nextBtn {
+    background: var(--color-app-blue);
+    color: white;
+    /* font-size: 1.2rem; */
+}

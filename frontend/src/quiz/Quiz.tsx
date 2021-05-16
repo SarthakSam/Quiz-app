@@ -8,7 +8,7 @@ import styles from './Quiz.module.css';
 import { Stepper } from './stepper/Stepper';
 import { Question } from './question/Question';
 import { UseQuiz } from '../quiz-store/quiz.context';
-import { NextQuestion, ResetQuiz, SetTotalQuestions } from '../quiz-store/quiz.reducer';
+import { NextQuestion, ResetQuiz, InitializeQuiz } from '../quiz-store/quiz.reducer';
 
 const getQuiz = async (): Promise<IQuiz> => {
     // const res = await axios.get();
@@ -24,7 +24,10 @@ export function Quiz() {
         (async () => {
            const quizData = await getQuiz();
            setQuiz(quizData);
-           dispatch(new SetTotalQuestions( quizData.questions.length ) );
+           const totalScore = quizData.questions.reduce((acc, cur) => { 
+              return acc + cur.points;
+           }, 0);
+           dispatch(new InitializeQuiz( { totalQuestions: quizData.questions.length, totalScore } ) );
         })();
     }, [])
 

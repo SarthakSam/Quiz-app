@@ -23,6 +23,7 @@ export type IAnswerStatus = "Correct" | "Incorrect" | "Not Answered";
 
 export type IQuizState = {
     totalQuestions: number;
+    totalScore: number;
     currentQuestion: number;
     answerStatus: IAnswerStatus[];
     score: number;

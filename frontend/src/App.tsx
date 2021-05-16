@@ -1,10 +1,12 @@
 import './App.css';
-import { Quiz } from './quiz/Quiz';
+// import { Quiz } from './quiz/Quiz';
+import { Result } from './result/Result';
 
 function App() {
   return (
     <div>
-      <Quiz />
+      {/* <Quiz /> */}
+      <Result />
     </div>
   );
 }
