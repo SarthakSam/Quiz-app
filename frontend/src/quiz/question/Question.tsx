@@ -25,7 +25,7 @@ export function Question( { question: questionObj, status = "Not Answered" }: { 
     const optionClass = status === "Not Answered"? '' : status === 'Correct'? 'correct' : 'incorrect';
 
     return (
-        <div>
+        <div style = {{ marginTop: '1em' }}>
             <Timer time = { 20 } key = { questionObj._id } />
             <h2 className={ styles.question } >{ questionObj.question }</h2>
             <ul className="row" style={{ margin: '2em 0' }}>
