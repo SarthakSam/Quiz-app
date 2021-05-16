@@ -1,11 +1,12 @@
-import { IQuizState, IOption } from '../quiz.types';
+import { IQuizState } from '../quiz.types';
 
 // export type CheckAnswer = { type: "CHECK_ANSWER"; payload: { option: IOption, points: number, negativePoints?: number} };
 // type NextQuestion = { type: "NEXT_QUESTION" };
 
 type Action =
 | CheckAnswer
-| NextQuestion;
+| NextQuestion
+| ResetQuiz;
 
 export class CheckAnswer {
     type: string;
@@ -21,6 +22,13 @@ export class NextQuestion {
     }
 }
 
+export class ResetQuiz {
+    type: string;
+    constructor(public payload?: any) {
+        this.type = "RESET_QUIZ"
+    }
+}
+
 export const initialState: IQuizState = {
     currentQuestion: 0,
     answerStatus: [],
@@ -31,6 +39,7 @@ export function quizReducer(state: IQuizState, action: Action) {
     switch( action.type ) {
         case 'CHECK_ANSWER': return checkAnswer(state, action);
         case 'NEXT_QUESTION': return { ...state, currentQuestion: state.currentQuestion + 1 };
+        case 'RESET_QUIZ': return { ...initialState };
         default:            return state;
     }
 }

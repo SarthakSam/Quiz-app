@@ -3,12 +3,12 @@ import axios from 'axios';
 import { FaPowerOff } from 'react-icons/fa';
 
 import { quiz } from '../mock.data';
-import { IQuiz, IQuizState } from '../quiz.types';
+import { IQuiz } from '../quiz.types';
 import styles from './Quiz.module.css';
 import { ProgressBar } from './progress-bar/ProgressBar';
 import { Question } from './question/Question';
 import { UseQuiz } from '../quiz-store/quiz.context';
-import { NextQuestion } from '../quiz-store/quiz.reducer';
+import { NextQuestion, ResetQuiz } from '../quiz-store/quiz.reducer';
 
 const getQuiz = async (): Promise<IQuiz> => {
     // const res = await axios.get();
@@ -31,6 +31,14 @@ export function Quiz() {
         dispatch(new NextQuestion() );
     }
 
+    const finishQuiz = () => {
+      console.log("Quiz Finished");
+    }
+
+    const quitQuiz = () => {
+      dispatch( new ResetQuiz() );
+    }
+
     return (
       <div className={ `row ${styles.quiz}` }>
         {
@@ -41,8 +49,12 @@ export function Quiz() {
               <ProgressBar/>
               <Question  question = { quiz.questions[currentQuestion] } status = { answerStatus[currentQuestion] } />
               <div className="row">
-                <button className={`btn col-6 ${styles.quitBtn}`}> <FaPowerOff fill="grey" style={{ fontSize: '1rem' }}/> Quit Quiz</button>
-                <button className={`btn col-6 ${styles.nextBtn}`} onClick={ nextQuestion }>Next</button>
+                <button className={`btn col-6 ${styles.quitBtn}`} onClick={ quitQuiz } > <FaPowerOff fill="grey" style={{ fontSize: '1rem' }}/> Quit Quiz</button>
+                {
+                  currentQuestion + 1 < quiz.questions.length? 
+                  <button className={`btn col-6 ${styles.nextBtn}`} onClick={ nextQuestion }>Next</button>:
+                  <button className={`btn col-6 ${styles.nextBtn}`} onClick={ finishQuiz }>Finish</button>
+                }
               </div>              
           </div>
         }
