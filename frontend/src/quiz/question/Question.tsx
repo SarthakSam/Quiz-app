@@ -29,10 +29,10 @@ export function Question( { question: questionObj, status = "Not Answered" }: { 
             <ul className="row" style={{ margin: '2em 0' }}>
                 {
                     questionObj.options.map( option => 
-                    <li key = { option._id } className={ `row col-12 ${ styles.option } 
+                    <li key = { option._id } className={ `row col-12 p-0 ${ styles.option } 
                     ${ selectedOption === option._id? styles[optionClass] : '' } ` } onClick = { () => { optionSelected(option) } }>
-                        <p className="col-10">{ option.name }</p>
-                        <div className="col-2"> 
+                        <p className="col-10 m-0" style={{ color: 'inherit' }}>{ option.name }</p>
+                        <div className="col-2 m-0"> 
                         {
                             status === 'Not Answered' && <div className={ styles.blank }></div>
                         }

@@ -1,12 +1,14 @@
 .question {
     color: var(--color-dull-white);
+    margin-top: 1.7em;
 }
 
 .option {
     border: 1px solid var(--color-dull-white);
     border-radius: 1.2em;
-    padding: 0;
+    padding: 0.2em 0.2em;
     margin: 0.8em 0;
+    color: var(--color-dull-white);
 }
 
 .option > p {
@@ -24,8 +26,10 @@
 
 .correct {
     border: 2.5px solid var(--color-app-blue);
+    color: var(--color-app-blue);
 }
 
 .incorrect {
     border: 2.5px solid var(--color-red);
+    color: var(--color-red);
 }
