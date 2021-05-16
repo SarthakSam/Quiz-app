@@ -2,7 +2,7 @@ import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
 import { IQuestion, IAnswerStatus, IOption } from "../../quiz.types";
 import styles from './Question.module.css';
-import { CheckAnswer } from '../../actions';
+import { CheckAnswer } from '../../quiz-store/quiz.reducer';
 import { UseQuiz } from '../../quiz-store/quiz.context';
 
 export function Question( { question: questionObj, status = "Not Answered" }: { question: IQuestion, status: IAnswerStatus } ) {
@@ -19,7 +19,7 @@ export function Question( { question: questionObj, status = "Not Answered" }: { 
     return (
         <div>
             <h2 className={ styles.question } >{ questionObj.question }</h2>
-            <ul className="row">
+            <ul className="row" style={{ margin: '2em 0' }}>
                 {
                     questionObj.options.map( option => 
                     <li className={ `row col-12 ${ styles.option }` } onClick = { () => { optionSelected(option) } }>
@@ -30,15 +30,15 @@ export function Question( { question: questionObj, status = "Not Answered" }: { 
                         }
                         {
                             status === 'Correct' && option.isCorrect && 
-                            <FaCheckCircle style={{ ...iconStyle, fill: '#15aaad', }} />
+                            <FaCheckCircle style={{ ...iconStyle, fill: 'var(--color-app-blue)', }} />
                         }
                         {
                             status === 'Incorrect' && option.isCorrect &&
-                            <FaCheckCircle style={{ ...iconStyle, fill: '#15aaad', }} />
+                            <FaCheckCircle style={{ ...iconStyle, fill: 'var(--color-app-blue)', }} />
                         }
                         {
                             status === 'Incorrect' && !option.isCorrect &&
-                            <FaTimesCircle style={{ ...iconStyle, fill: 'darkRed', }} />
+                            <FaTimesCircle style={{ ...iconStyle, fill: 'var(--color-red)', }} />
                         }       
                         </div>
                     </li>)
