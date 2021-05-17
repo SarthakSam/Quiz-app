@@ -28,3 +28,10 @@ export type IQuizState = {
     answerStatus: IAnswerStatus[];
     score: number;
 }
+
+export type ICategory = {
+    _id: string;
+    image?: string;
+    title: string;
+    quizes: string[];
+}

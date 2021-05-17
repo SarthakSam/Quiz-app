@@ -1,12 +1,14 @@
 import './App.css';
 // import { Quiz } from './quiz/Quiz';
-import { Result } from './result/Result';
+// import { Result } from './result/Result';
+import { Home } from './home/Home';
 
 function App() {
   return (
     <div>
       {/* <Quiz /> */}
-      <Result />
+      {/* <Result /> */}
+      <Home />
     </div>
   );
 }

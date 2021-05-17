@@ -1,4 +1,4 @@
-import { IQuiz } from './quiz.types';
+import { IQuiz, ICategory } from './quiz.types';
 
 export const quiz: IQuiz = {
     _id: '1234',
@@ -75,3 +75,36 @@ export const quiz: IQuiz = {
         }
     ]
 }
+
+export const categories: ICategory[] = [
+    {   
+        _id: "cat1",
+        title: "Mathematics",
+        quizes: []
+    },
+    {   
+        _id: "cat2",
+        title: "Science",
+        quizes: []
+    },
+    {   
+        _id: "cat3",
+        title: "Drama",
+        quizes: []
+    },
+    {   
+        _id: "cat4",
+        title: "Art and Craft",
+        quizes: []
+    },
+    {   
+        _id: "cat5",
+        title: "Knowledge",
+        quizes: []
+    },
+    {   
+        _id: "cat6",
+        title: "Language",
+        quizes: []
+    },
+]
