@@ -1,0 +1,20 @@
+.quiz {
+    border: none;
+    border-radius: 10px;
+    padding-top: 0.5em;
+    background: white;
+    box-shadow: none;
+}
+
+.quiz ul {
+    margin: 1em 0;
+}
+
+.takeQuiz {
+    background-color: var(--color-violet);
+}
+
+.questions {
+    color: var(--color-app-green);
+    font-size: 0.8rem;
+}

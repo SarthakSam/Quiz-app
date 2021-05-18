@@ -1,31 +1,19 @@
 .home {
-    background: #ddf4f6;
-    height: 100vh;
-    width: 100%;
-}
-
-.viewAll {
-    color: var(--color-app-blue);
-    font-weight: 600;
-    background: #a1eaed;
-    border: none;
-}
-
-.categories {
-    display: flex;
-    width: 100%;
+    background: #F5F3FF;
+    /* opacity: 0.8; */
     padding: 1em;
+    /* height: 100vh; */
+    /* width: 100%; */
 }
 
-.categories > h2 {
-    flex: 1;
+.newQuizBtn {
+    background-color: var(--color-app-green);
 }
 
-.categoryCard {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 70px;
-    background: white;
-    border-radius: 5px;
+ul {
+    list-style: none;
+}
+
+.categoriesList h3 {
+    color: #6B7280;
 }

@@ -15,7 +15,9 @@ export type IQuestion = {
 
 export type IQuiz = {
     _id: string;
+    image?: string;
     title: string;
+    description: string;
     questions: IQuestion[];
 }
 
@@ -33,5 +35,5 @@ export type ICategory = {
     _id: string;
     image?: string;
     title: string;
-    quizes: string[];
+    quizes: IQuiz[];
 }
