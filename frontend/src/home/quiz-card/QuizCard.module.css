@@ -1,9 +1,14 @@
 .quiz {
     border: none;
     border-radius: 10px;
-    padding-top: 0.5em;
+    /* padding-top: 0.5em; */
+    margin-top: 1.2em;
     background: white;
     box-shadow: none;
+}
+
+.quiz:hover {
+    box-shadow: 0 5px 5px lightpink;
 }
 
 .quiz ul {

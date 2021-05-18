@@ -9,5 +9,6 @@
 .nextBtn {
     background: var(--color-app-blue);
     color: white;
+    text-decoration: none;
     /* font-size: 1.2rem; */
 }

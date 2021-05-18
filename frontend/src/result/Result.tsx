@@ -1,5 +1,6 @@
 import { UseQuiz } from '../quiz-store/quiz.context';
 import styles from './Result.module.css';
+import { Link } from 'react-router-dom';
 
 export function Result() {
     const { state: { totalScore, score } } = UseQuiz();
@@ -15,7 +16,7 @@ export function Result() {
                 <div className="col-1"></div>
                 <button className="btn col-4">Share Results</button>
                 <div className="col-2"></div>
-                <button className={`btn col-4 ${styles.nextBtn}`}>Take New Quiz</button>
+                <Link to="/" className={`btn col-4 ${styles.nextBtn}`}>Take New Quiz</Link>
                 <div className="col-1"></div>
             </div>
             {/* </div> */}

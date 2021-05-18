@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'; 
+import { useNavigate } from 'react-router-dom';
 import { FaPowerOff } from 'react-icons/fa';
 
 import { quiz } from '../mock.data';
@@ -19,6 +20,7 @@ const getQuiz = async (): Promise<IQuiz> => {
 export function Quiz() {
   const [quiz, setQuiz] = useState<IQuiz | null>(null);
   const { state: { currentQuestion, answerStatus}, dispatch } = UseQuiz();
+  const navigate = useNavigate();
 
     useEffect( () => {
         (async () => {
@@ -36,7 +38,7 @@ export function Quiz() {
     }
 
     const finishQuiz = () => {
-      console.log("Quiz Finished");
+      navigate('/result');
     }
 
     const quitQuiz = () => {

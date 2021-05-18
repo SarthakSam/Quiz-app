@@ -1,4 +1,4 @@
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaSearch } from 'react-icons/fa';
 import styles from './Home.module.css';
 
 import { categories } from '../mock.data';
@@ -9,11 +9,13 @@ export function Home() {
     console.log(categories);
     return (
         <div className={ `row ${ styles.home }` }>
-            <div className="col-10 col-lg-9 col-md-8 col-sm-8">
-                <input className="input" type="search" name="" id="" />
-            </div>
-            <div className="col-2 col-lg-3 col-md-4 col-sm-4">
-                <button className={ `btn btn--success ${ styles.newQuizBtn }` } >Create New Quiz <FaPlus fill="white" /> </button>
+            <div className={` col-12 ${ styles.topBar } `} >
+                <div className="input input--icon">
+                    <FaSearch style={{ marginLeft: '0.4em' }} />
+                    <input type="search" placeholder="Enter text" />
+                        {/* <i className="fa fa-search"></i> */}
+                </div>
+                <button className={ `btn btn--success ${ styles.newQuizBtn }` } >Create Quiz <FaPlus fill="white" /> </button>
             </div>
             <ul className={ `col-12 ${styles.categoriesList}` }>
                 {
