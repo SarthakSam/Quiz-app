@@ -1,5 +1,6 @@
 import { FaPlus, FaSearch } from 'react-icons/fa';
 import styles from './Home.module.css';
+import { Link } from 'react-router-dom';
 
 import { categories } from '../mock.data';
 import { Category } from '../category/Category';
@@ -15,7 +16,7 @@ export function Home() {
                     <input type="search" placeholder="Enter text" />
                         {/* <i className="fa fa-search"></i> */}
                 </div>
-                <button className={ `btn btn--success ${ styles.newQuizBtn }` } >Create Quiz <FaPlus fill="white" /> </button>
+                <Link to="/newQuiz" className={ `btn btn--success ${ styles.newQuizBtn }` } > Create Quiz <FaPlus fill="white" /> </Link>
             </div>
             <ul className={ `col-12 ${styles.categoriesList}` }>
                 {

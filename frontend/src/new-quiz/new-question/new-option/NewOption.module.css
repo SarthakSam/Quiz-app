@@ -1,0 +1,22 @@
+.option {
+    margin-top: 1em;
+}
+
+.input {
+    background: inherit;
+    color: white;
+    border: none;
+    border-bottom: 2px solid white;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+::placeholder {
+    color: rgba(250, 250, 220, 0.8);
+    font-weight: 500;
+}
+
+.radio {
+    transform: scale(2);
+    margin-top: 1em;
+}

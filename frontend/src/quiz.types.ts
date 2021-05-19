@@ -37,3 +37,13 @@ export type ICategory = {
     title: string;
     quizes: IQuiz[];
 }
+
+export type INewQuestion = {
+    _id: string;
+    question: string;
+    options: IOption[];
+    points: number;
+    negativePoints?: number;
+    explanation?: string;
+    no: number;
+}

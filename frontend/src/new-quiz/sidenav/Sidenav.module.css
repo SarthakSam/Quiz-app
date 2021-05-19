@@ -1,0 +1,31 @@
+aside {
+    height: 40vh;
+    /* min-height: 350px; */
+    overflow-y: auto;
+    direction: rtl;
+}
+
+.navItem {
+    padding: 1em 2em 1em 1em;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #f1f1f1;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: white;
+  }

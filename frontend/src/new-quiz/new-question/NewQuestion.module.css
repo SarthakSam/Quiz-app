@@ -1,0 +1,21 @@
+.input {
+    background: inherit;
+    color: white;
+    border: none;
+    border-bottom: 2px solid rgba(250, 250, 220, 0.9);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+::placeholder {
+    color: rgba(250, 250, 220, 0.8);
+    font-weight: 500;
+}
+
+.addOptionBtn {
+    margin-left: auto;
+}
+
+label, h2 {
+    color: rgba(250, 250, 220, 0.8);
+}

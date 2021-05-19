@@ -4,6 +4,7 @@ import { Home } from './home/Home';
 import { Routes, Route, Link } from 'react-router-dom';
 import { Category } from './category/Category';
 import styles from './App.module.css';
+import { NewQuiz } from './new-quiz/NewQuiz';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
 +       <Route path="/category/:id" element={<Category />} />
 +       <Route path="/quiz" element={<Quiz />} />
 +       <Route path="/result" element={<Result />} />
+        <Route path="/newQuiz" element={<NewQuiz />} />
 +     </Routes>
     </div>
   );
@@ -30,3 +32,4 @@ export default App;
 // https://dribbble.com/shots/8210470-Quiz-App-Mobile-Application
 // https://dribbble.com/shots/6730696-Never-Have-I-Ever
 // https://dribbble.com/shots/15250794-Online-Quiz-Dashboard-Concept
+// https://dribbble.com/shots/5440714-Concept-Survey-Builder
