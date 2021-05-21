@@ -1,5 +1,5 @@
 const { model, Schema } = require('mongoose'),
-      QuestionSchema    = require('../models/Question').QuestionSchema;
+      QuestionSchema    = require('../models/Question.model').QuestionSchema;
 
 const QuizSchema = new Schema({
     title: { type: String, required: 'Title cannot be empty' },

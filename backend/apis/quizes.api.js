@@ -1,7 +1,7 @@
 const express = require('express'),
       router  = express.Router(),
       lodash = require('lodash'),
-      Quiz    = require('../models/Quiz').Quiz;
+      Quiz    = require('../models/Quiz.model').Quiz;
 
 router.get('/', async (req, res) => {
     try {
@@ -72,7 +72,7 @@ router.param('quizId', async (req, res, next, quizId) => {
     }
 });
 
-function getCategory(req, res, next) {
+async function getCategory(req, res, next) {
     const categoryId = req.body.categoryId;
     if(!categoryId) {
         return res.status(500).json({ message: 'Category is mandatory' });

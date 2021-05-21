@@ -1,5 +1,5 @@
 const { model, Schema } = require('mongoose'),
-      OptionSchema = require('../models/Option').OptionSchema;
+      OptionSchema = require('../models/Option.model').OptionSchema;
 
 const QuestionSchema = new Schema({
     question: { type: String, required: 'Question statement is mandatory' },

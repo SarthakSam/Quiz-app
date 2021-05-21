@@ -1,8 +1,8 @@
 const express       = require('express'),
       app           = express()
       mongoose      = require('mongoose'),
-      quizesRouter    = require('./apis/quizes'),
-      categoriesRouter = require('./apis/categories');
+      quizesRouter    = require('./apis/quizes.api'),
+      categoriesRouter = require('./apis/categories.api');
 
 const PORT = process.env.PORT || 3001;
 const dbURL = 'mongodb://localhost:27017/quiz' 
