@@ -12,10 +12,16 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', getCategory , async (req, res) => {
     const body = req.body;
+    const category = req.category;
+    if(!categoryId) {
+        res.status(500).json({ message: "Category is mandatory" });
+    }
     try {
         const newQuiz = await Quiz.create(body);
+        category.quizes.add(newQuiz);
+        category.save();
         res.status(201).json({message: "success", quiz: newQuiz});
     } catch(err) {
         console.log(err);
@@ -65,5 +71,24 @@ router.param('quizId', async (req, res, next, quizId) => {
         res.status(500).json({ message: 'Something went wrong' });
     }
 });
+
+function getCategory(req, res, next) {
+    const categoryId = req.body.categoryId;
+    if(!categoryId) {
+        return res.status(500).json({ message: 'Category is mandatory' });
+    }
+    try {
+        const category = await Category.findById(categoryId);
+        if(category) {
+            req.category = category;
+            next();
+        } else {
+            res.status(500).json({ message: 'Unable to fetch category right now' });
+        }
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({ message: 'Something went wrong' });
+    }
+}
 
 module.exports = router;
