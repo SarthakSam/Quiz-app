@@ -20,6 +20,10 @@ app.get('/', (req, res) => {
     res.status(200).json({ message: 'Quiz App' });
 });
 
+app.use((req, res) => {
+    res.status(404).json({ message: "No such url exists" });
+})
+
 app.listen(PORT, (err) => {
     if(err) {
         console.log(err);
