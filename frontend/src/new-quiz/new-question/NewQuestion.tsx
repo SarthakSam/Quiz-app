@@ -2,7 +2,7 @@ import { INewQuestionProps } from "../../quiz.types";
 import { NewOption } from './new-option/NewOption';
 import styles from './NewQuestion.module.css';
 
-export function NewQuestion({ _id, question, options, points, negativePoints, explanation ,index, onChange  }: INewQuestionProps) {
+export function NewQuestion({ question, options, points, negativePoints, explanation ,index, onChange  }: INewQuestionProps) {
 
     const onOptionChange = (i: number, key: string, value: string | boolean) => {
         const changedOptions = options.map( (option, index) => {

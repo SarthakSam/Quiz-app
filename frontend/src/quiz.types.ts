@@ -24,6 +24,7 @@ export type IQuiz = {
 export type IAnswerStatus = "Correct" | "Incorrect" | "Not Answered";
 
 export type IQuizState = {
+    categories: ICategory[],
     totalQuestions: number;
     totalScore: number;
     currentQuestion: number;
@@ -38,10 +39,30 @@ export type ICategory = {
     quizes: IQuiz[];
 }
 
-export type INewQuestionProps = {
-    _id: string;
+export type INewOption = {
+    name: string;
+    isCorrect: boolean;
+}
+
+export type INewQuestion = {
     question: string;
-    options: IOption[];
+    options: INewOption[];
+    points: number;
+    negativePoints?: number;
+    explanation?: string;
+}
+
+export type INewQuiz = {
+    image?: string;
+    title: string;
+    description: string;
+    questions: INewQuestion[];
+}
+
+
+export type INewQuestionProps = {
+    question: string;
+    options: INewOption[];
     points: number;
     negativePoints?: number;
     explanation?: string;
@@ -51,7 +72,6 @@ export type INewQuestionProps = {
 
 export type INewOptionProps = {
     radioFor: string;
-    _id: string;
     name: string;
     isCorrect: boolean;
     onChange: Function;

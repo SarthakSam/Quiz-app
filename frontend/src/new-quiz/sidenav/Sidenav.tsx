@@ -1,10 +1,10 @@
 import { MouseEventHandler } from "react";
 import { FaPlus } from 'react-icons/fa';
 
-import { IQuestion } from "../../quiz.types";
+import { INewQuestion } from "../../quiz.types";
 import styles from './Sidenav.module.css';
 
-export function Sidenav( { questions, activeIndex, onSelect, addNewQuestion }: { questions: IQuestion[], activeIndex: number, onSelect: Function, addNewQuestion: MouseEventHandler } ) {
+export function Sidenav( { questions, activeIndex, onSelect, addNewQuestion }: { questions: INewQuestion[], activeIndex: number, onSelect: Function, addNewQuestion: MouseEventHandler } ) {
     
     return (
         <aside className="col-3">

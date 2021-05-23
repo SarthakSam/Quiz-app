@@ -1,8 +1,7 @@
-import { IOption, IQuestion, IQuiz } from '../quiz.types';
+import { INewOption, INewQuestion, INewQuiz } from '../quiz.types';
 
-export function getNewQuizObject(): IQuiz {
+export function getNewQuizObject(): INewQuiz {
     return {
-        _id: '',
         title: '',
         image: '',
         description: '',
@@ -10,9 +9,8 @@ export function getNewQuizObject(): IQuiz {
     }
 }
 
-export function getNewQuestionObject(): IQuestion {
+export function getNewQuestionObject(): INewQuestion {
     return {
-        _id: '',
         question: '',
         options: [getNewOptionObject(), getNewOptionObject()],
         points: 0,
@@ -20,9 +18,8 @@ export function getNewQuestionObject(): IQuestion {
     }
 }
 
-export function getNewOptionObject(): IOption {
+export function getNewOptionObject(): INewOption {
     return {
-        _id: '',
         name: '',
         isCorrect: false
     }

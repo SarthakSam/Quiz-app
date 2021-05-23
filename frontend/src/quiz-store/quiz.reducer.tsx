@@ -1,14 +1,22 @@
-import { IQuizState } from '../quiz.types';
+import { ICategory, IQuizState } from '../quiz.types';
 
 // export type CheckAnswer = { type: "CHECK_ANSWER"; payload: { option: IOption, points: number, negativePoints?: number} };
 // type NextQuestion = { type: "NEXT_QUESTION" };
 
 type Action =
+| InitializeCategories
 | InitializeQuiz
 | CheckAnswer
 | NextQuestion
 | ResetQuiz;
 
+export class InitializeCategories {
+    type: string;
+    constructor(public payload: { categories: ICategory[]}) {
+        this.type = 'INITIALIZE_CATEGORIES';
+        this.payload = payload;
+    }
+}
 export class InitializeQuiz {
     type: string;
     constructor(public payload: { totalQuestions: number, totalScore: number }) {
@@ -38,6 +46,7 @@ export class ResetQuiz {
 }
 
 export const initialState: IQuizState = {
+    categories: [],
     totalQuestions: 0,
     totalScore: 0,
     currentQuestion: 0,
@@ -47,6 +56,7 @@ export const initialState: IQuizState = {
 
 export function quizReducer(state: IQuizState, action: Action) {
     switch( action.type ) {
+        case 'INITIALIZE_CATEGORIES': return { ...state, categories: action.payload.categories };
         case 'INITIALIZE_QUIZ': return { ...state, ...action.payload };
         case 'CHECK_ANSWER': return checkAnswer(state, action);
         case 'NEXT_QUESTION': return nextQuestion(state, action);

@@ -1,6 +1,7 @@
 const express = require('express'),
       router  = express.Router(),
       lodash = require('lodash'),
+      Category = require('../models/Category.model').Category,
       Quiz    = require('../models/Quiz.model').Quiz;
 
 router.get('/', async (req, res) => {
@@ -13,14 +14,11 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', getCategory , async (req, res) => {
-    const body = req.body;
+    const body = req.body.quiz;
     const category = req.category;
-    if(!categoryId) {
-        res.status(500).json({ message: "Category is mandatory" });
-    }
     try {
         const newQuiz = await Quiz.create(body);
-        category.quizes.add(newQuiz);
+        category.quizes.push(newQuiz);
         category.save();
         res.status(201).json({message: "success", quiz: newQuiz});
     } catch(err) {
@@ -73,7 +71,7 @@ router.param('quizId', async (req, res, next, quizId) => {
 });
 
 async function getCategory(req, res, next) {
-    const categoryId = req.body.categoryId;
+    const categoryId = req.body.category;
     if(!categoryId) {
         return res.status(500).json({ message: 'Category is mandatory' });
     }
