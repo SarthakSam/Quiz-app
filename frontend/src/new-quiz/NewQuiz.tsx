@@ -1,8 +1,9 @@
 import { FaAngleLeft } from 'react-icons/fa';
 import { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
 
-import { INewQuiz, INewOption } from '../quiz.types';
+import { INewQuiz, INewOption, IServerError, IApiResponse, IQuizResponse } from '../quiz.types';
 import { NewQuestion } from './new-question/NewQuestion';
 import { getNewQuestionObject, getNewQuizObject } from './utils';
 import styles from './NewQuiz.module.css';
@@ -10,11 +11,22 @@ import { Sidenav } from './sidenav/Sidenav';
 import { NewCategory } from './new-category/NewCategory';
 import { UseQuiz } from '../quiz-store/quiz.context';
 
-function saveQuiz(quiz: INewQuiz, category: string) {
+async function saveQuiz<T>(quiz: INewQuiz, category: string) : Promise<IApiResponse<T> | IServerError> {
     try {
-        const resp = axios.post('/quizes', {quiz, category});
+        const resp = await axios.post<T>('/quizes', {quiz, category});
+        return { data: resp.data, status: resp.status };
     } catch(err) {
-        console.log(err);
+        if(axios.isAxiosError(err)) {
+            const serverError = err as AxiosError<IServerError>;
+            if(serverError.response && serverError.response.data) {
+                return { ...serverError.response.data, status: serverError.response.status, };
+            }
+
+            if( err.response && err.response.data ) {
+                return err.response.data;
+            }
+        }
+        return { message: "Something went wrong", status: 400 };
     }
 }
 
@@ -24,6 +36,7 @@ export function NewQuiz() {
     const [category, setCategory] = useState("");
     const [newCategoryPopupVisible, setNewCategoryPopupVisible] = useState(false);
     const { state: { categories: options } } = UseQuiz();
+    const navigate = useNavigate();
 
     console.log({quiz});
 
@@ -48,8 +61,15 @@ export function NewQuiz() {
         setIndex(quiz.questions.length);
     }
 
-    const publishQuiz = () => {
-        const resp = saveQuiz(quiz, category);
+    const publishQuiz = async () => {
+        const resp = await saveQuiz<IQuizResponse>(quiz, category);
+        if( "data" in resp ) {
+            // console.log("Quiz created successfully");
+            navigate('/');
+        }
+         else {
+             window.alert(resp.message);
+         }
     }
 
     return (
@@ -57,8 +77,9 @@ export function NewQuiz() {
 
             <div className={`row `} style={{ height: '70px' }}>
                 <div className="row">
-                    <span className="col-1 backBtn"><FaAngleLeft /></span>
-                    <p className="col-8 title">Create New Quiz</p>
+                    <div className="col-2"></div>
+                    <Link to="/" className="col-1 backBtn"><FaAngleLeft /></Link>
+                    <p className="col-6 title">Create New Quiz</p>
                     <div className="col-3">
                         <button className="btn publishBtn" onClick = { publishQuiz }>Publish</button>
                     </div>
@@ -81,6 +102,7 @@ export function NewQuiz() {
 
                         <div className={ `col-12 custom-dropdown ${ styles.categoriesMenu }`}>
                                 <select className="custom-dropdown__menu" placeholder="Enter category" value={ category } onChange = { (e) => { setCategory( e.target.value ) } }>
+                                    <option value=""></option>
                                     {
                                         options.map( option => <option key = { option._id } value = { option._id } onChange = { () => {  } } >{ option.title }</option> )
                                     }

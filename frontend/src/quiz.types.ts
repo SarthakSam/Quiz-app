@@ -90,6 +90,11 @@ export type IApiResponse<T> = {
     status: number;
 }
 
+export type IQuizResponse = {
+    message: string;
+    quiz: IQuiz;
+}
+
 export type ICategoryResponse = {
     message: string;
     categories: ICategory[];
