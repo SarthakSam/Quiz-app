@@ -1,17 +1,40 @@
 import { FaAngleLeft } from 'react-icons/fa';
 
 import { useState } from 'react';
-import { IQuiz } from '../quiz.types';
+import { IOption, IQuiz } from '../quiz.types';
 import { NewQuestion } from './new-question/NewQuestion';
-import { getNewQuizObject } from './utils';
+import { getNewQuestionObject, getNewQuizObject } from './utils';
 import styles from './NewQuiz.module.css';
 import { Sidenav } from './sidenav/Sidenav';
 
+const options = [{ id: 'cat1', name: 'Category1', value: 'category1' }, { id: 'cat2', name: 'Category2', value: 'category2' }];
+
 export function NewQuiz() {
     const [ quiz, setQuiz ] = useState<IQuiz>( getNewQuizObject() );
+    const [ index, setIndex ] = useState(-1);
+    const [category, setCategory] = useState("");
+
+    console.log({quiz});
 
     const onChange = (key: string, value: string) => {
         setQuiz( quiz => ({ ...quiz, [key]: value }) );
+    }
+
+    const onQuestionChange = (index: number, key: string, value: string | number | IOption[]) => {
+        setQuiz( quiz => {
+            const questions = quiz.questions.map( (question, i) => {
+                if(index === i) {
+                    return { ...question, [key]: value };
+                }
+                return question;
+            });
+            return { ...quiz, questions };
+        });
+    }
+
+    const addNewQuestion = () => {
+        setQuiz( quiz => ({ ...quiz, questions: [...quiz.questions, getNewQuestionObject()] }) );
+        setIndex(quiz.questions.length);
     }
 
     return (
@@ -29,9 +52,11 @@ export function NewQuiz() {
             <div className={ `row ${styles.body}` }>
 
                 <div className="col-1"></div>
-                <Sidenav questions={ quiz.questions } />    
+                <Sidenav questions={ quiz.questions } activeIndex = { index } onSelect = { setIndex } addNewQuestion = { addNewQuestion } />
                 <div className="col-1"></div>
                 <div className={ `col-6 ${styles.form}` }>
+                    {
+                        index === -1?
                     <div className="row">
                         <h2>Quiz Info</h2>
                         <input className={ `col-12 ${ styles.input }` } type="text" placeholder="Enter title" name='title' value = { quiz.title } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { onChange('title', e.target.value) } } />
@@ -40,28 +65,16 @@ export function NewQuiz() {
                         <input className={ `col-12 ${ styles.input }` } type="text" placeholder="Enter image url" name='videoURL' value = { quiz.image } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { onChange('image', e.target.value) } } />
 
                         <div className={ `col-12 custom-dropdown ${ styles.categoriesMenu }`}>
-                                <select className="custom-dropdown__menu" placeholder="Enter category">
-                                    <option value="" >Something 1</option>
-                                    <option value="" >Something 2</option>
-                                    <option value="" >Something 3</option>
-                                    <option value="" >Something 4</option>
-                                    <option value="" >Something 5</option>
+                                <select className="custom-dropdown__menu" placeholder="Enter category" value={ category }>
+                                    {
+                                        options.map( option => <option key = { option.id } value = { option.value } onChange = { () => { setCategory( option.value ) } } >{ option.name }</option> )
+                                    }
                                 </select>
                         </div> 
-
-                        {/* <div className="dropdown" tabIndex={0}>
-                                <button className="dropdown__toggle btn btn--outline" type="button">DropDown Button</button>
-                                <div className="dropdown__menu">
-                                    <a href="#" className="dropdown__item">Something 1</a>
-                                    <a href="#" className="dropdown__item">Something 2 </a>
-                                    <a href="#" className="dropdown__item">Something 3</a>
-                                    <div className="dropdown__divider"></div>
-                                    <a href="#" className="dropdown__item">Something else here</a>
-                                </div>
-                            </div> */}
                     </div>
-
-                    {/* <NewQuestion { ...quiz.questions[0] } no = {1} />     */}
+                    :
+                    <NewQuestion { ...quiz.questions[index] } index = { index } onChange = { onQuestionChange } />
+                    }
                             
                 </div>
             </div>

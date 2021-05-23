@@ -1,19 +1,30 @@
-import { INewQuestion } from "../../quiz.types";
+import { INewQuestionProps } from "../../quiz.types";
 import { NewOption } from './new-option/NewOption';
 import styles from './NewQuestion.module.css';
 
-export function NewQuestion({ _id, question, options, points, negativePoints, explanation ,no }: INewQuestion) {
+export function NewQuestion({ _id, question, options, points, negativePoints, explanation ,index, onChange  }: INewQuestionProps) {
+
+    const onOptionChange = (i: number, key: string, value: string | boolean) => {
+        const changedOptions = options.map( (option, index) => {
+            if(index === i) {
+                return { ...option, [key]: value };
+            }
+            return { ...option, isCorrect: false};
+        } )
+        onChange(index, 'options', changedOptions);
+    }
+
     return (
         <div className="row">
-            <h2>Question: { no }</h2>
-            <input className={ `col-12 ${ styles.input }` } type="text" placeholder="Enter question statement" name='question' value = { question } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { } } />
+            <h2>Question: { index + 1 }</h2>
+            <input className={ `col-12 ${ styles.input }` } type="text" placeholder="Enter question statement" name='question' value = { question } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { onChange(index, 'question', e.target.value) } } />
             <label className={ `col-3` }htmlFor="points">Enter Points</label>
-            <input className={ `col-2 ${ styles.input }` }  type="number" placeholder="Enter points" name='points' value = { points } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { } } />
-            <label className={ `col-5` }htmlFor="negativePoints">Enter Negative Points</label>
-            <input className={ `col-2 ${ styles.input }` }  type="number" placeholder="Enter negative points" name='negativePoints' value = { negativePoints } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { } } />
-            <input className={ `col-12 ${ styles.input }` } type="text" placeholder="Enter explanation for answer" name='explanation' value = { explanation } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { } } />
+            <input className={ `col-2 ${ styles.input }` }  type="number" placeholder="Enter points" name='points' value = { points } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { onChange(index, 'points', e.target.value) } } />
+            <label className={ `col-4` }htmlFor="negativePoints">Enter Negative Points</label>
+            <input className={ `col-2 ${ styles.input }` }  type="number" placeholder="Enter negative points" name='negativePoints' value = { negativePoints } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { onChange(index, 'negativePoints', e.target.value) } } />
+            <input className={ `col-12 ${ styles.input }` } type="text" placeholder="Enter explanation for answer" name='explanation' value = { explanation } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { onChange(index, 'explanation', e.target.value) } } />
             {
-                options.map( (option, index) => <NewOption { ...option } /> )
+                options.map( (option, i) => <NewOption key={i} index= { i } { ...option } radioFor={ `question {index + 1}` } onChange = { onOptionChange } /> )
             }
             <div className="row col-12">
                 <button className={ `btn btn--primary ${ styles.addOptionBtn }` }>Add Option</button>

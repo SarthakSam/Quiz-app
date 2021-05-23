@@ -6,7 +6,7 @@ export function getNewQuizObject(): IQuiz {
         title: '',
         image: '',
         description: '',
-        questions: [getNewQuestionObject(), getNewQuestionObject(), getNewQuestionObject(), getNewQuestionObject(), getNewQuestionObject()]
+        questions: [getNewQuestionObject()]
     }
 }
 

@@ -1,6 +1,6 @@
 aside {
     height: 40vh;
-    /* min-height: 350px; */
+    min-height: 350px;
     overflow-y: auto;
     direction: rtl;
 }
@@ -10,6 +10,16 @@ aside {
     color: rgba(255, 255, 255, 0.6);
     font-weight: 800;
     font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.active {
+  color: white;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 ::-webkit-scrollbar {

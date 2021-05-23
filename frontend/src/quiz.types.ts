@@ -38,12 +38,39 @@ export type ICategory = {
     quizes: IQuiz[];
 }
 
-export type INewQuestion = {
+export type INewQuestionProps = {
     _id: string;
     question: string;
     options: IOption[];
     points: number;
     negativePoints?: number;
     explanation?: string;
-    no: number;
+    index: number;
+    onChange: Function;
+}
+
+export type INewOptionProps = {
+    radioFor: string;
+    _id: string;
+    name: string;
+    isCorrect: boolean;
+    onChange: Function;
+    index: number;
+}
+
+export type IServerError = {
+    message: string;
+    status: number;
+}
+
+// type IApiResponseStatus = 200 | 201;
+
+export type IApiResponse<T> = {
+    data: T;
+    status: number;
+}
+
+export type ICategoryResponse = {
+    message: string;
+    categories: ICategory[];
 }
