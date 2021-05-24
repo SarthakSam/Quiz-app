@@ -4,13 +4,14 @@
   "description": "Quiz App",
   "main": "index.js",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "lodash": "^4.17.21",
     "mongoose": "^5.12.10"
   },
   "devDependencies": {},
   "scripts": {
-    "start":  "node index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sarthak",
