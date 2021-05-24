@@ -3,12 +3,13 @@
     border-radius: 10px;
     /* padding-top: 0.5em; */
     margin-top: 1.2em;
-    background: white;
+    background: rgba(250, 250, 250, 0.2);
+    /* border: 1px solid white; */
     box-shadow: none;
 }
 
-.quiz:hover {
-    box-shadow: 0 5px 5px lightpink;
+.quiz * {
+    color: white;
 }
 
 .quiz ul {
@@ -16,7 +17,7 @@
 }
 
 .takeQuiz {
-    background-color: var(--color-violet);
+    background-color: var(--color-app-blue);
 }
 
 .questions {

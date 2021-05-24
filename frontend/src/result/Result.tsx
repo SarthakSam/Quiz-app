@@ -9,12 +9,20 @@ export function Result() {
         <div className={ `row ${ styles.result } ` }>
             {/* <div className="col-8"> */}
             <h2>Quiz Result</h2>
+            <br />
+            <br />
+
             <h2>Congratulations!</h2>
+            <br />
+            <br />
+
             <h4>YOUR SCORE</h4>
+            <br />
+
             <h1> <span>{ score }</span> <span>/ { totalScore }</span> </h1>
             <div className="row">
                 <div className="col-1"></div>
-                <button className="btn col-4">Share Results</button>
+                <button className="btn col-4">Go to Home Page</button>
                 <div className="col-2"></div>
                 <Link to="/" className={`btn col-4 ${styles.nextBtn}`}>Take New Quiz</Link>
                 <div className="col-1"></div>

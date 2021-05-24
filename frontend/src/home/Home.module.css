@@ -1,6 +1,6 @@
 .home {
-    background: #e0acbb1a;
-    background-image: var(--blue-background1);
+    /* background: #e0acbb1a; */
+    background-image: var(--blue-background);
     /* opacity: 0.8; */
     padding: 1em;
     /* height: 100vh; */
@@ -18,8 +18,16 @@
     max-width: 600px;
 }
 
+.title {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
 .newQuizBtn {
     background-color: var(--color-app-green);
+    text-decoration: none;
 }
 
 ul {
