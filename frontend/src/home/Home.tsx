@@ -3,17 +3,16 @@ import styles from './Home.module.css';
 import { Link } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 
-// import { categories } from '../mock.data';
-// import { Category } from '../category/Category';
 import { QuizCard } from './quiz-card/QuizCard';
-import { useEffect, useState } from 'react';
-import { ICategory, IServerError, IApiResponse, ICategoryResponse } from '../quiz.types';
+import { useEffect } from 'react';
+import { IServerError, IApiResponse, ICategoryResponse } from '../quiz.types';
 import { UseQuiz } from '../quiz-store/quiz.context';
 import { InitializeCategories } from '../quiz-store/quiz.reducer';
+import { getUrl } from '../api.config';
 
 async function getCategories<T>(): Promise<IApiResponse<T> | IServerError>  {
     try {
-        const response = await axios.get<T>('/categories');
+        const response = await axios.get<T>(getUrl('categories'));
         return { data: response.data, status: response.status };
     } catch(err) {
         if(axios.isAxiosError(err)) {

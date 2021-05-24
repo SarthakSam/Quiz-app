@@ -10,10 +10,11 @@ import { Stepper } from './stepper/Stepper';
 import { Question } from './question/Question';
 import { UseQuiz } from '../quiz-store/quiz.context';
 import { NextQuestion, ResetQuiz, InitializeQuiz } from '../quiz-store/quiz.reducer';
+import { getUrl } from '../api.config';
 
 async function getQuiz<T>(id: string): Promise<IApiResponse<T> | IServerError> {
     try {
-      const res = await axios.get<T>(`/quizes/${id}`);
+      const res = await axios.get<T>(getUrl('specificQuizes', { id }));
       return { data: res.data, status: res.status };
     } catch(err) {
       if( axios.isAxiosError(err) ) {
