@@ -22,7 +22,7 @@ export function Result() {
             <h1> <span>{ score }</span> <span>/ { totalScore }</span> </h1>
             <div className="row">
                 <div className="col-1"></div>
-                <button className="btn col-4">Go to Home Page</button>
+                <Link to="/" className={`btn col-4 btn--inverted`}>Go To Home Page</Link>
                 <div className="col-2"></div>
                 <Link to="/" className={`btn col-4 ${styles.nextBtn}`}>Take New Quiz</Link>
                 <div className="col-1"></div>

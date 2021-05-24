@@ -30,7 +30,7 @@ export function NewQuestion({ question, options, points, negativePoints, explana
             <input className={ `col-12 ${ styles.input }` } type="text" placeholder="Enter explanation for answer" name='explanation' value = { explanation } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { onChange(index, 'explanation', e.target.value) } } />
             <div className="col-12" style={{ maxHeight: '30vh', overflowY: 'auto' }}>
             {
-                options.map( (option, i) => <NewOption key={i} index= { i } { ...option } radioFor={ `question {index + 1}` } onChange = { onOptionChange } /> )
+                options.map( (option, i) => <NewOption key={`${index}:${i}`} index= { i } { ...option } radioFor={ `question {index + 1}` } onChange = { onOptionChange } /> )
             }
             </div>
             <div className="row col-12">

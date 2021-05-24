@@ -10,10 +10,11 @@ import styles from './NewQuiz.module.css';
 import { Sidenav } from './sidenav/Sidenav';
 import { NewCategory } from './new-category/NewCategory';
 import { UseQuiz } from '../quiz-store/quiz.context';
+import { getUrl } from '../api.config';
 
 async function saveQuiz<T>(quiz: INewQuiz, category: string) : Promise<IApiResponse<T> | IServerError> {
     try {
-        const resp = await axios.post<T>('/quizes', {quiz, category});
+        const resp = await axios.post<T>(getUrl('postQuiz'), {quiz, category});
         return { data: resp.data, status: resp.status };
     } catch(err) {
         if(axios.isAxiosError(err)) {
@@ -78,10 +79,12 @@ export function NewQuiz() {
             <div className={`row `} style={{ height: '70px' }}>
                 <div className="row">
                     <div className="col-2"></div>
-                    <Link to="/" className="col-1 backBtn"><FaAngleLeft /></Link>
-                    <p className="col-6 title">Create New Quiz</p>
+                    <div className="row col-7">
+                        <Link to="/" className={styles.backBtn}><FaAngleLeft style={{ fill: 'white' }} /></Link>
+                        <p className={styles.title}>Create New Quiz</p>
+                    </div>
                     <div className="col-3">
-                        <button className="btn publishBtn" onClick = { publishQuiz }>Publish</button>
+                        <button className={ `btn btn--primary ${styles.publishBtn}` } onClick = { publishQuiz }>Publish</button>
                     </div>
                 </div>
             </div>
