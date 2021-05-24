@@ -1,6 +1,7 @@
 const express       = require('express'),
       app           = express()
       mongoose      = require('mongoose'),
+      cors          = require('cors'),
       quizesRouter    = require('./apis/quizes.api'),
       categoriesRouter = require('./apis/categories.api');
 
@@ -14,6 +15,7 @@ mongoose.connect(prodDbURL, {useNewUrlParser: true, useUnifiedTopology: true})
 .catch(err => console.log(err));
 
 app.use(express.json());
+app.use(cors());
 app.use('/quizes', quizesRouter);
 app.use('/categories', categoriesRouter);
 
