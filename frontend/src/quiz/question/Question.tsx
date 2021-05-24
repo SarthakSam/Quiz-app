@@ -28,10 +28,10 @@ export function Question( { question: questionObj, status = "Not Answered" }: { 
         <div style = {{ marginTop: '1em' }}>
             <Timer time = { 20 } key = { questionObj._id } />
             <h2 className={ styles.question } >{ questionObj.question }</h2>
-            <ul className="row" style={{ margin: '2em 0' }}>
+            <ul className="row" style={{ margin: '2em 0', justifyContent: 'space-between' }}>
                 {
                     questionObj.options.map( option => 
-                    <li key = { option._id } className={ `row col-12 p-0 ${ styles.option } 
+                    <li key = { option._id } className={ `row col-6 col-sm-12 p-0 ${ styles.option } 
                     ${ selectedOption === option._id? styles[optionClass] : '' } ` } onClick = { () => { optionSelected(option) } }>
                         <p className="col-10 m-0" style={{ color: 'inherit' }}>{ option.name }</p>
                         <div className="col-2 m-0"> 

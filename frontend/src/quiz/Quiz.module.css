@@ -1,6 +1,7 @@
 .quiz {
-    background-image: var(--blue-background1);
+    background-image: var(--blue-background);
     height: 100vh;
+    justify-content: space-around;
 }
 
 .quizTitle {

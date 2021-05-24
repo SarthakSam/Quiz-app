@@ -1,7 +1,7 @@
 
 .progressBar {
     width: 100%;
-    max-width: 500px;
+    /* max-width: 500px; */
     /* background-color: transparent; */
     border: 3px solid lightGrey;
     height: 2em;
@@ -15,7 +15,7 @@
     height: 100%;
     background: var(--color-app-blue);
     border-radius: 1.2em;
-    max-width: calc(500px - 2em);
+    /* max-width: calc(500px - 2em); */
     width: var(--timer);
 }
 

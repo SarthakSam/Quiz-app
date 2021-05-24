@@ -1,5 +1,6 @@
 .home {
     background: #e0acbb1a;
+    background-image: var(--blue-background1);
     /* opacity: 0.8; */
     padding: 1em;
     /* height: 100vh; */

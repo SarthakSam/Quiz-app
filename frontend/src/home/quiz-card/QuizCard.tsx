@@ -7,7 +7,7 @@ export function QuizCard({ _id, title, image, description, questions }: IQuiz ) 
     const navigate = useNavigate();
 
     const takeQuiz = () => {
-        navigate(`/quiz`);
+        navigate(`/quiz/${_id}`);
     }
 
     return (
