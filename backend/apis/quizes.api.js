@@ -2,9 +2,10 @@ const express = require('express'),
       router  = express.Router(),
       lodash = require('lodash'),
       Category = require('../models/Category.model').Category,
-      Quiz    = require('../models/Quiz.model').Quiz;
+      Quiz    = require('../models/Quiz.model').Quiz,
+      isAuthenticated = require('../middleware/isAuthenticated');
 
-router.get('/', async (req, res) => {
+router.get('/', isAuthenticated, async (req, res) => {
     try {
         const quizes = await Quiz.find({});
         res.status(200).json({message: "success", quizes});    
@@ -13,7 +14,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', getCategory , async (req, res) => {
+router.post('/', isAuthenticated, getCategory, async (req, res) => {
     const body = req.body.quiz;
     const category = req.category;
     try {
@@ -27,11 +28,11 @@ router.post('/', getCategory , async (req, res) => {
     }
 });
 
-router.get('/:quizId', async (req, res) => {
+router.get('/:quizId', isAuthenticated, async (req, res) => {
     res.status(200).json({message: "success", quiz: req.quiz});    
 });
 
-router.put('/:quizId', async (req, res) => {
+router.put('/:quizId', isAuthenticated, async (req, res) => {
     const body = req.body;
     let quiz = req.quiz;
     try {
@@ -44,7 +45,7 @@ router.put('/:quizId', async (req, res) => {
     }
 })
 
-router.delete('/:quizId', async (req, res) => {
+router.delete('/:quizId', isAuthenticated, async (req, res) => {
     let quiz = req.quiz;
     try {
         await quiz.delete();

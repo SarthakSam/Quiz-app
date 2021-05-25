@@ -3,19 +3,21 @@ const express       = require('express'),
       mongoose      = require('mongoose'),
       cors          = require('cors'),
       quizesRouter    = require('./apis/quizes.api'),
+      authRouter      = require('./apis/user.api'),
       categoriesRouter = require('./apis/categories.api');
 
 const PORT = process.env.PORT || 3001;
-const dbURL = 'mongodb://localhost:27017/quiz'
+const localDbURL = 'mongodb://localhost:27017/quiz'
 const prodDbURL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.ueoao.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 
-mongoose.connect(prodDbURL, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(localDbURL, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => { console.log(" DB connected") })
 .catch(err => console.log(err));
 
 app.use(express.json());
 app.use(cors());
+app.use('/', authRouter);
 app.use('/quizes', quizesRouter);
 app.use('/categories', categoriesRouter);
 

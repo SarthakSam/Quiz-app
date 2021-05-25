@@ -1,8 +1,9 @@
 const express = require('express'),
       router  = express.Router(),
-      Category = require('../models/Category.model').Category;
+      Category = require('../models/Category.model').Category,
+      isAuthenticated = require('../middleware/isAuthenticated');
 
-router.get('/', async (req, res) => {
+router.get('/', isAuthenticated, async (req, res) => {
     try {
         const categories = await Category.find({}).populate("quizes");
         res.status(200).json({message: "success", categories});
@@ -11,7 +12,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', isAuthenticated, async (req, res) => {
     const body = req.body;
     try {
         const category = await Category.create(body);
@@ -39,7 +40,7 @@ router.post('/', async (req, res) => {
 //     }
 // })
 
-router.delete('/:categoryId', async (req, res) => {
+router.delete('/:categoryId', isAuthenticated, async (req, res) => {
     const category = req.category;
     try {
         await category.delete();
