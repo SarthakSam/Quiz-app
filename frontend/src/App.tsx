@@ -7,8 +7,14 @@ import styles from './App.module.css';
 import { NewQuiz } from './new-quiz/NewQuiz';
 import { Signup } from './signup/Signup';
 import { Signin } from './signin/Signin';
+import { Loader } from './loader/Loader';
+import { UseLoader } from './contexts/loader.context';
+import { NotificationContainer } from './notification/Notification-container';
+import { useNotifications } from './contexts/notifications-context';
 
 function App() {
+  const { loading } = UseLoader();
+  const { notifications } = useNotifications();
   return (
     <div className={ styles.app }>
       <Routes>
@@ -21,6 +27,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
 +     </Routes>
+      <Loader loading={ loading } />
+      <NotificationContainer/>
     </div>
   );
 }

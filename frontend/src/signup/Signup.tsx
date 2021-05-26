@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUrl } from "../api.config";
+import { useNotifications } from "../contexts/notifications-context";
 
 import { UseAxios } from '../custom-hooks/useAxios';
 import { UseQuiz } from "../quiz-store/quiz.context";
@@ -14,24 +15,26 @@ export function Signup() {
     const { postData } = UseAxios();
     const { dispatch } = UseQuiz();
     const navigate = useNavigate();
+    const { showNotification } = useNotifications();
 
     const formSubmit = async (e: FormEvent) => {
         e.preventDefault();
         if(!username || !password1 || !password2) {
-            alert("Please fill all the madatory details first");
+            showNotification({ type: 'WARNING', message: 'Please fill all the madatory details first' })
             return;
         }
         if(password1 !== password2) {
-            alert("passwords doesnt match");
+            showNotification({ type: 'WARNING', message: 'passwords doesnt match' })
             return;
         }
         const response = await postData<IUserResponse>( getUrl('signup'), { username, password: password1 } );
         console.log(response);
         if( 'data' in response) {
             dispatch( new AuthenticateUser({ username: response.data.username, authorization: response.data.authorization }) );
+            showNotification({ type: 'SUCCESS', message: response.data.message })
             navigate('/');
         } else {
-            alert(response.message);
+            showNotification({ type: 'ERROR', message: response.message })
         }
     }
 

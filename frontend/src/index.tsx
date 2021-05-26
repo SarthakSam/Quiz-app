@@ -5,12 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from "react-router-dom";
 import { QuizProvider } from './quiz-store/quiz.context';
+import { LoaderProvider } from './contexts/loader.context';
+import { NotificationsProvider } from './contexts/notifications-context';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <QuizProvider>
-        <App />
+        <LoaderProvider>
+          <NotificationsProvider>
+            <App />
+          </NotificationsProvider>
+        </LoaderProvider>
       </QuizProvider>
     </Router>
   </React.StrictMode>,

@@ -111,3 +111,10 @@ export type IUserResponse = {
     username: string;
     authorization: string;
 }
+
+export type INotification = {
+    id?: string;
+    message: string;
+    type: 'SUCCESS' | 'WARNING' | 'ERROR';
+    duration?: number;
+}
