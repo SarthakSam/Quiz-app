@@ -5,6 +5,8 @@ import { Routes, Route, Link } from 'react-router-dom';
 import { Category } from './category/Category';
 import styles from './App.module.css';
 import { NewQuiz } from './new-quiz/NewQuiz';
+import { Signup } from './signup/Signup';
+import { Signin } from './signin/Signin';
 
 function App() {
   return (
@@ -14,8 +16,10 @@ function App() {
 +       <Route path="/home" element={<Home />} />
 +       <Route path="/category/:id" element={<Category />} />
 +       <Route path="/quiz/:id" element={<Quiz />} />
-+       <Route path="/result" element={<Result />} />
         <Route path="/newQuiz" element={<NewQuiz />} />
++       <Route path="/result" element={<Result />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/signin" element={<Signin />} />
 +     </Routes>
     </div>
   );

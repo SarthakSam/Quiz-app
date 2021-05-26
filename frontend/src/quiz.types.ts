@@ -23,6 +23,11 @@ export type IQuiz = {
 
 export type IAnswerStatus = "Correct" | "Incorrect" | "Not Answered";
 
+export type IUser = {
+    username: string;
+    authorization: string;
+}
+
 export type IQuizState = {
     categories: ICategory[],
     totalQuestions: number;
@@ -30,6 +35,7 @@ export type IQuizState = {
     currentQuestion: number;
     answerStatus: IAnswerStatus[];
     score: number;
+    userDetails: IUser | null;
 }
 
 export type ICategory = {
@@ -98,4 +104,10 @@ export type IQuizResponse = {
 export type ICategoryResponse = {
     message: string;
     categories: ICategory[];
+}
+
+export type IUserResponse = {
+    message: string;
+    username: string;
+    authorization: string;
 }

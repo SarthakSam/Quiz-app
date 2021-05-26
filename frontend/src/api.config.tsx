@@ -1,10 +1,12 @@
 const urlMapping = {
     'specificQuizes': '/quizes/:id',
     'categories': '/categories',
-    'postQuiz': '/quizes'
+    'postQuiz': '/quizes',
+    'signup': '/signup',
+    'signin': '/signin'
 }
 
-type urlKey = 'specificQuizes' | 'categories' | 'postQuiz';
+type urlKey = 'specificQuizes' | 'categories' | 'postQuiz' | 'signup' | 'signin';
 
 const baseUrl = 'https://test-ur-knowledge.herokuapp.com';
 
