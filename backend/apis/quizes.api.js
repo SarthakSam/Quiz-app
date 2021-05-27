@@ -5,7 +5,7 @@ const express = require('express'),
       Quiz    = require('../models/Quiz.model').Quiz,
       isAuthenticated = require('../middleware/isAuthenticated');
 
-router.get('/', isAuthenticated, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const quizes = await Quiz.find({});
         res.status(200).json({message: "success", quizes});    

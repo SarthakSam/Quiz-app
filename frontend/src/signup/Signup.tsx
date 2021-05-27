@@ -1,12 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
+
 import { getUrl } from "../api.config";
 import { useNotifications } from "../contexts/notifications-context";
-
 import { UseAxios } from '../custom-hooks/useAxios';
 import { UseQuiz } from "../quiz-store/quiz.context";
 import { AuthenticateUser } from "../quiz-store/quiz.reducer";
 import { IUserResponse } from "../quiz.types";
+import styles from './Signup.module.css';
 
 export function Signup() {
     const [username, setUsername] = useState("");
@@ -39,13 +40,33 @@ export function Signup() {
     }
 
     return (
-        <div>
-            <form onSubmit={formSubmit}>
-                <h2>Signin</h2>
-                <input type="text" name="" id="" value={username} onChange = { (e:ChangeEvent<HTMLInputElement>) => setUsername(e.target.value) } />
-                <input type="password" name="" id="" value={password1} onChange = { (e:ChangeEvent<HTMLInputElement>) => setPassword1(e.target.value) }  />
-                <input type="password" name="" id="" value={password2} onChange = { (e:ChangeEvent<HTMLInputElement>) => setPassword2(e.target.value) }  />
-                <button>Signin</button>
+        <div className={ styles.container }>
+            <form className={ styles.form } onSubmit={formSubmit}>
+                <ul className={ styles.nav }>
+                    <li>
+                        <NavLink activeClassName={styles.active} to="/signup">Signup</NavLink>
+                    </li>
+                    <li>
+                        <NavLink activeClassName={styles.active} to="/signin">Signin</NavLink>
+                    </li>
+                </ul>
+                <br />
+                <label htmlFor="username">Username</label><br />
+                <div className="input input--fluid">
+                    <input type="text" name="username" value={username} onChange = { (e:ChangeEvent<HTMLInputElement>) => setUsername(e.target.value) } />
+                </div>
+                <br />
+                <label htmlFor="password1">Enter password</label><br />
+                <div className="input input--fluid">
+                    <input type="password" name="password1" value={password1} onChange = { (e:ChangeEvent<HTMLInputElement>) => setPassword1(e.target.value) }  />
+                </div>
+                <br />
+                <label htmlFor="password">re-enter password</label><br />
+                <div className="input input--fluid">
+                    <input type="password" name="password2"  value={password2} onChange = { (e:ChangeEvent<HTMLInputElement>) => setPassword2(e.target.value) }  />
+                </div>
+                <br />
+                <button className={ `btn btn--primary ${ styles.signupBtn }` }>Signup</button>
             </form>
         </div>
     )

@@ -101,6 +101,11 @@ export type IQuizResponse = {
     quiz: IQuiz;
 }
 
+export type IQuizesResponse = {
+    message: string;
+    quizes: IQuiz[];
+}
+
 export type ICategoryResponse = {
     message: string;
     categories: ICategory[];

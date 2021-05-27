@@ -1,7 +1,7 @@
 import { Quiz } from './quiz/Quiz';
 import { Result } from './result/Result';
 import { Home } from './home/Home';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Category } from './category/Category';
 import styles from './App.module.css';
 import { NewQuiz } from './new-quiz/NewQuiz';
@@ -10,11 +10,11 @@ import { Signin } from './signin/Signin';
 import { Loader } from './loader/Loader';
 import { UseLoader } from './contexts/loader.context';
 import { NotificationContainer } from './notification/Notification-container';
-import { useNotifications } from './contexts/notifications-context';
+// import { useNotifications } from './contexts/notifications-context';
 
 function App() {
   const { loading } = UseLoader();
-  const { notifications } = useNotifications();
+  // const { notifications } = useNotifications();
   return (
     <div className={ styles.app }>
       <Routes>

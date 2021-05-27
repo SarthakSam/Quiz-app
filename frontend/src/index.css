@@ -14,6 +14,9 @@
   --color-app-blue: #15aaad;
   --color-dark-blue: #050524;
   --color-app-green: #10B981;
+  --color-light-blue: #BFDBFE;
+  --color-light-purple: #DDD6FE;
+  --color-light-green: #ECFDF5;
 }
 
 @media screen and (max-width: 400px) {

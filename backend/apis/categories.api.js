@@ -3,7 +3,7 @@ const express = require('express'),
       Category = require('../models/Category.model').Category,
       isAuthenticated = require('../middleware/isAuthenticated');
 
-router.get('/', isAuthenticated, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const categories = await Category.find({}).populate("quizes");
         res.status(200).json({message: "success", categories});
