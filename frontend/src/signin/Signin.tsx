@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink, useLocation } from "react-router-dom";
 
 import { getUrl } from "../api.config";
 import { useNotifications } from "../contexts/notifications-context";
@@ -16,6 +16,7 @@ export function Signin() {
     const { dispatch } = UseQuiz();
     const navigate = useNavigate();
     const { showNotification } = useNotifications();
+    const  {  state }: any = useLocation();
 
     const formSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -29,7 +30,7 @@ export function Signin() {
         if( 'data' in response) {
             dispatch( new AuthenticateUser({ username: response.data.username, authorization: response.data.authorization }) );
             showNotification({ type: 'SUCCESS', message: response.data.message })
-            navigate('/');
+            navigate( state?.from? state.from : '/' );
         } else {
             showNotification({ type: 'ERROR', message: response.message })
         }

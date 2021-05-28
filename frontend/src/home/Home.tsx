@@ -50,7 +50,7 @@ export function Home() {
                 </nav>
                 <ul className={ `row ${styles.categoriesList}` }>
                 {
-                    quizes.map( quiz => <QuizCard { ...quiz }  />)
+                    quizes.map( quiz => <QuizCard key={ quiz._id } { ...quiz }  />)
                 }
                 </ul>
             </div>

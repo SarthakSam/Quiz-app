@@ -8,7 +8,7 @@ export function NotificationContainer() {
     return (
         <ul className={styles.notification__container + " row"}>
             {
-                notifications.map( notification => <Notification { ...notification } />)
+                notifications.map( notification => <Notification key={ notification.id } { ...notification } />)
             }
         </ul>
     )

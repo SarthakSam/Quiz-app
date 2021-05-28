@@ -16,6 +16,7 @@ import { UseAxios } from './custom-hooks/useAxios';
 import { ICategoryResponse } from './quiz.types';
 import { getUrl } from './api.config';
 import { UseQuiz } from './quiz-store/quiz.context';
+import { PrivateRoute } from './PrivateRoute';
 
 function App() {
   const { loading } = UseLoader();
@@ -41,9 +42,9 @@ function App() {
 +       <Route path="/" element={<Home />} />
 +       <Route path="/home" element={<Home />} />
 +       <Route path="/category/:id" element={<Category />} />
-+       <Route path="/quiz/:id" element={<Quiz />} />
-        <Route path="/newQuiz" element={<NewQuiz />} />
-+       <Route path="/result" element={<Result />} />
+        <PrivateRoute path="/quiz/:id" element={ <Quiz /> } />
+        <PrivateRoute path="/newQuiz" element={<NewQuiz />} />
++       <PrivateRoute path="/result" element={<Result />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
 +     </Routes>
