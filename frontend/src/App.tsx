@@ -10,11 +10,31 @@ import { Signin } from './signin/Signin';
 import { Loader } from './loader/Loader';
 import { UseLoader } from './contexts/loader.context';
 import { NotificationContainer } from './notification/Notification-container';
-// import { useNotifications } from './contexts/notifications-context';
+import { useEffect } from 'react';
+import { InitializeCategories } from './quiz-store/quiz.reducer';
+import { UseAxios } from './custom-hooks/useAxios';
+import { ICategoryResponse } from './quiz.types';
+import { getUrl } from './api.config';
+import { UseQuiz } from './quiz-store/quiz.context';
 
 function App() {
   const { loading } = UseLoader();
-  // const { notifications } = useNotifications();
+  const { getData } = UseAxios();
+  const { dispatch } = UseQuiz();
+
+  useEffect( () => {
+    ( async () => {
+      const response = await getData<ICategoryResponse>( getUrl('categories') );
+      if( "data" in response ) {
+          dispatch( new InitializeCategories({ categories: response.data.categories } ));
+      } 
+      else {
+          console.log(response.message);
+      }
+    })();
+  }, [] );
+  
+
   return (
     <div className={ styles.app }>
       <Routes>

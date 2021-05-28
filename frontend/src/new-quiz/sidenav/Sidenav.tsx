@@ -11,7 +11,7 @@ export function Sidenav( { questions, activeIndex, onSelect, addNewQuestion }: {
             <ul>
                 <li tabIndex={0} className={ `${styles.navItem} ${ activeIndex === -1 && styles.active }` } onClick = { () => { onSelect(-1) } }>Change Quiz Details</li>
                 {
-                    questions.map((question, index) => <li tabIndex={0} className={ `${styles.navItem} ${ activeIndex === index && styles.active }` } onClick = { () => { onSelect(index) } } >Question { index + 1 }</li>)
+                    questions.map((question, index) => <li key={index} tabIndex={0} className={ `${styles.navItem} ${ activeIndex === index && styles.active }` } onClick = { () => { onSelect(index) } } >Question { index + 1 }</li>)
                 }
                 <li tabIndex={0} className={ styles.navItem } onClick = { addNewQuestion }> Add New Question <FaPlus style={{ fill: "white" }} /> </li>
             </ul>

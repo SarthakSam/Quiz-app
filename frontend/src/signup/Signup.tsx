@@ -44,10 +44,10 @@ export function Signup() {
             <form className={ styles.form } onSubmit={formSubmit}>
                 <ul className={ styles.nav }>
                     <li>
-                        <NavLink activeClassName={styles.active} to="/signup">Signup</NavLink>
+                        <NavLink activeClassName={styles.active} to="/signin">Signin</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName={styles.active} to="/signin">Signin</NavLink>
+                        <NavLink activeClassName={styles.active} to="/signup">Signup</NavLink>
                     </li>
                 </ul>
                 <br />

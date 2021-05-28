@@ -5,9 +5,10 @@ const express = require('express'),
 
 router.get('/', async (req, res) => {
     try {
-        const categories = await Category.find({}).populate("quizes");
+        const categories = await Category.find({});
         res.status(200).json({message: "success", categories});
     } catch(err) {
+        console.log(err);
         res.status(500).json({message: 'Unable to fetch categories'});
     }
 });
@@ -23,9 +24,9 @@ router.post('/', isAuthenticated, async (req, res) => {
     }
 });
 
-// router.get('/:quizId', async (req, res) => {
-//     res.status(200).json({message: "success", quiz: req.quiz});    
-// });
+router.get('/:quizId', async (req, res) => {
+    res.status(200).json({message: "success", quiz: req.quiz});    
+});
 
 // router.put('/:quizId', async (req, res) => {
 //     const body = req.body;
