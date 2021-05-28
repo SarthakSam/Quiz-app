@@ -7,7 +7,7 @@ import styles from './Sidenav.module.css';
 export function Sidenav( { questions, activeIndex, onSelect, addNewQuestion }: { questions: INewQuestion[], activeIndex: number, onSelect: Function, addNewQuestion: MouseEventHandler } ) {
     
     return (
-        <aside className="col-3">
+        <aside className={ `col-4 col-xl-5 col-sm-12 ${ styles.aside }` }>
             <ul>
                 <li tabIndex={0} className={ `${styles.navItem} ${ activeIndex === -1 && styles.active }` } onClick = { () => { onSelect(-1) } }>Change Quiz Details</li>
                 {

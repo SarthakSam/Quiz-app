@@ -1,12 +1,24 @@
 .newForm {
     background: var(--blue-background1);
     height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav {
+    margin-top: 1em;
+}
+
+.nav * {
+    margin: 0 0.5em;
+    /* padding: 0.1em 0.5em; */
 }
 
 .body {
     display: flex;
     height: calc(100vh - 70px);
     align-items: center;
+    justify-content: space-around;
 }
 
 .backBtn {
@@ -23,6 +35,7 @@
 
 .publishBtn {
     background-color: var(--color-app-blue);
+    margin-left: auto;
 }
 
 .form {

@@ -9,11 +9,12 @@ import { UseQuiz } from '../quiz-store/quiz.context';
 import { getUrl } from '../api.config';
 import { UseAxios } from '../custom-hooks/useAxios';
 import { useNotifications } from '../contexts/notifications-context';
+import { LogoutUser } from '../quiz-store/quiz.reducer';
 
 
 export function Home() {
 
-    const { state: { categories, userDetails } } = UseQuiz();
+    const { state: { categories, userDetails }, dispatch } = UseQuiz();
     const { getData } = UseAxios();
     const [quizes, setQuizes] = useState<IQuiz[]>([]);
     const { showNotification } = useNotifications();
@@ -30,6 +31,10 @@ export function Home() {
         })();
     }, []); 
 
+    const logout = () => {
+        dispatch( new LogoutUser() );
+    }
+
     return (
         <div className={ `row ${ styles.home }` }>
             <div className="col-9 col-lg-10 col-md-11 col-sm-12">
@@ -39,7 +44,7 @@ export function Home() {
                             userDetails? 
                             <ul>
                                 <Link to="/newQuiz" className={ `btn btn--success ${ styles.newQuizBtn }` } > Create Quiz <FaPlus fill="white" /> </Link>
-                                <button className={ `btn btn--inverted ${styles.logout}` } >Logout</button>
+                                <button className={ `btn btn--inverted ${styles.logout}` } onClick = { logout } >Logout</button>
                             </ul>
                             :
                             <ul>

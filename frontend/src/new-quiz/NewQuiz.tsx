@@ -76,50 +76,47 @@ export function NewQuiz() {
     return (
         <div className={ styles.newForm }>
 
-            <div className={`row `} style={{ height: '70px' }}>
-                <div className="row">
-                    <div className="col-2"></div>
-                    <div className="row col-7">
-                        <Link to="/" className={styles.backBtn}><FaAngleLeft style={{ fill: 'white' }} /></Link>
-                        <p className={styles.title}>Create New Quiz</p>
-                    </div>
-                    <div className="col-3">
-                        <button className={ `btn btn--primary ${styles.publishBtn}` } onClick = { publishQuiz }>Publish</button>
+            <div className="col-9 col-lg-10 col-md-11 col-sm-12">
+                <nav className={ `row ${styles.nav}` }>
+                    <Link to="/" className={styles.backBtn}><FaAngleLeft style={{ fill: 'white' }} /></Link>
+                    <p className={styles.title}>Create New Quiz</p>
+                    <button className={ `btn btn--primary ${styles.publishBtn}` } onClick = { publishQuiz }>Publish</button>
+                </nav>
+
+                <div className={ `row ${styles.body}` }>
+
+                    {/* <div className="col-1"></div> */}
+                    <Sidenav questions={ quiz.questions } activeIndex = { index } onSelect = { setIndex } addNewQuestion = { addNewQuestion } />
+                    {/* <div className="col-1"></div> */}
+                    <div className={ `col-6 col-xl-7 col-sm-12 ${styles.form}` }>
+                        {
+                            index === -1?
+                        <div className="row">
+                            <h2>Quiz Info</h2>
+                            <input className={ `col-12 ${ styles.input }` } type="text" placeholder="Enter title" name='title' value = { quiz.title } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { onChange('title', e.target.value) } } />
+                            <textarea className={ `col-12 ${styles.textarea} ` } placeholder="Enter description" name='description' value = { quiz.description } onChange = { (e: React.ChangeEvent<HTMLTextAreaElement>): void => { onChange('description', e.target.value) } }>
+                            </textarea>
+                            <input className={ `col-12 ${ styles.input }` } type="text" placeholder="Enter image url" name='videoURL' value = { quiz.image } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { onChange('image', e.target.value) } } />
+
+                            <div className={ `col-12 custom-dropdown ${ styles.categoriesMenu }`}>
+                                    <select className="custom-dropdown__menu" placeholder="Enter category" value={ category } onChange = { (e) => { setCategory( e.target.value ) } }>
+                                        <option value=""></option>
+                                        {
+                                            options.map( option => <option key = { option._id } value = { option._id } onChange = { () => {  } } >{ option.title }</option> )
+                                        }
+                                        {/* <option onClick = { () => { setNewCategoryPopupVisible(true) } } > Create New Category </option> */}
+                                    </select>
+                            </div> 
+                        </div>
+                        :
+                        <NewQuestion { ...quiz.questions[index] } index = { index } onChange = { onQuestionChange } />
+                        }
+                                
                     </div>
                 </div>
             </div>
-            <div className={ `row ${styles.body}` }>
-
-                <div className="col-1"></div>
-                <Sidenav questions={ quiz.questions } activeIndex = { index } onSelect = { setIndex } addNewQuestion = { addNewQuestion } />
-                <div className="col-1"></div>
-                <div className={ `col-6 ${styles.form}` }>
-                    {
-                        index === -1?
-                    <div className="row">
-                        <h2>Quiz Info</h2>
-                        <input className={ `col-12 ${ styles.input }` } type="text" placeholder="Enter title" name='title' value = { quiz.title } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { onChange('title', e.target.value) } } />
-                        <textarea className={ `col-12 ${styles.textarea} ` } placeholder="Enter description" name='description' value = { quiz.description } onChange = { (e: React.ChangeEvent<HTMLTextAreaElement>): void => { onChange('description', e.target.value) } }>
-                        </textarea>
-                        <input className={ `col-12 ${ styles.input }` } type="text" placeholder="Enter image url" name='videoURL' value = { quiz.image } onChange = { (e: React.ChangeEvent<HTMLInputElement>): void => { onChange('image', e.target.value) } } />
-
-                        <div className={ `col-12 custom-dropdown ${ styles.categoriesMenu }`}>
-                                <select className="custom-dropdown__menu" placeholder="Enter category" value={ category } onChange = { (e) => { setCategory( e.target.value ) } }>
-                                    <option value=""></option>
-                                    {
-                                        options.map( option => <option key = { option._id } value = { option._id } onChange = { () => {  } } >{ option.title }</option> )
-                                    }
-                                    {/* <option onClick = { () => { setNewCategoryPopupVisible(true) } } > Create New Category </option> */}
-                                </select>
-                        </div> 
-                    </div>
-                    :
-                    <NewQuestion { ...quiz.questions[index] } index = { index } onChange = { onQuestionChange } />
-                    }
-                            
-                </div>
-            </div>
-            { newCategoryPopupVisible && <NewCategory closePopup = { setNewCategoryPopupVisible } /> }
+                { newCategoryPopupVisible && <NewCategory closePopup = { setNewCategoryPopupVisible } /> }
+           
         </div>
     )
 }

@@ -78,7 +78,12 @@ export function quizReducer(state: IQuizState, action: Action) {
         case 'INITIALIZE_QUIZ': return { ...state, ...action.payload };
         case 'CHECK_ANSWER': return checkAnswer(state, action);
         case 'NEXT_QUESTION': return nextQuestion(state, action);
-        case 'RESET_QUIZ': return { ...initialState };
+        case 'RESET_QUIZ': return { ...state,  
+                                    totalQuestions: 0,
+                                    totalScore: 0,
+                                    currentQuestion: 0,
+                                    answerStatus: [],
+                                    score: 0 };
         case 'AUTHENTICATE_USER': return authenticateUser(state, action);
         case 'LOGOUT_USER': return logoutUser(state, action);
         default:            return state;
