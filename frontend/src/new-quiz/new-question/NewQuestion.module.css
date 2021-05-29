@@ -23,3 +23,7 @@ label, h2 {
 label {
     font-weight: 600;
 }
+
+.error {
+    border-color: red !important;
+}

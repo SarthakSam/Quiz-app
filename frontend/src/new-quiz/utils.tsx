@@ -1,20 +1,34 @@
 import { INewOption, INewQuestion, INewQuiz } from '../quiz.types';
 
+export class InputFieldObj {
+    value;
+    isValid;
+    error;
+    constructor(value: any) {
+        this.value = value;
+        this.isValid = true;
+        this.error = '';
+    }
+}
+
 export function getNewQuizObject(): INewQuiz {
     return {
-        title: '',
-        image: '',
-        description: '',
-        questions: [getNewQuestionObject()]
+        title: new InputFieldObj(""),
+        image: new InputFieldObj(""),
+        description: new InputFieldObj(""),
+        questions: new InputFieldObj( [getNewQuestionObject()] ),
+        isValid: true
     }
 }
 
 export function getNewQuestionObject(): INewQuestion {
     return {
-        question: '',
-        options: [getNewOptionObject(), getNewOptionObject()],
-        points: 0,
-        negativePoints: 0
+        question: new InputFieldObj(""),
+        options: new InputFieldObj([getNewOptionObject(), getNewOptionObject()]),
+        points: new InputFieldObj(0),
+        negativePoints: new InputFieldObj(0),
+        explanation: new InputFieldObj(""),
+        isValid: true
     }
 }
 

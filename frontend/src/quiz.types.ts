@@ -51,27 +51,39 @@ export type INewOption = {
 }
 
 export type INewQuestion = {
-    question: string;
-    options: INewOption[];
-    points: number;
-    negativePoints?: number;
-    explanation?: string;
+    question: InputField<string>;
+    options: InputField<INewOption[]>;
+    points: InputField<number>;
+    negativePoints?: InputField<number>;
+    explanation?: InputField<string>;
+    isValid: boolean;
+}
+
+export type INewQuestionKeys = "question" | "options" | "points" | "negativePoints" | "explanation";
+
+export type InputField<T> = {
+    value: T;
+    isValid: boolean;
+    error: string;
 }
 
 export type INewQuiz = {
-    image?: string;
-    title: string;
-    description: string;
-    questions: INewQuestion[];
+    image: InputField<string>;
+    title: InputField<string>;
+    description: InputField<string>;
+    questions: InputField<INewQuestion[]>;
+    isValid: boolean;
 }
+
+export type INewQuizKeys = "image" | "title" | "description" | "questions";
 
 
 export type INewQuestionProps = {
-    question: string;
-    options: INewOption[];
-    points: number;
-    negativePoints?: number;
-    explanation?: string;
+    question: InputField<string>;
+    options: InputField<INewOption[]>;
+    points: InputField<number>;
+    negativePoints?: InputField<number>;
+    explanation?: InputField<string>;
     index: number;
     onChange: Function;
 }
