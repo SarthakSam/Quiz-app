@@ -34,7 +34,7 @@ export function getNewQuestionObject(): INewQuestion {
 
 export function getNewOptionObject(): INewOption {
     return {
-        name: '',
-        isCorrect: false
+        name: new InputFieldObj(''),
+        isCorrect: new InputFieldObj(false)
     }
 }

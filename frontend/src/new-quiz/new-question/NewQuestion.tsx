@@ -1,15 +1,15 @@
 import { FormField } from "../../form-field/FormField";
-import { INewQuestionProps } from "../../quiz.types";
+import { INewOptionKeys, INewQuestionProps } from "../../quiz.types";
 import { getNewOptionObject } from "../utils";
 import { NewOption } from './new-option/NewOption';
 import styles from './NewQuestion.module.css';
 
 export function NewQuestion({ question, options, points, negativePoints, explanation ,index, onChange  }: INewQuestionProps) {
 
-    const onOptionChange = (i: number, key: string, value: string | boolean) => {
+    const onOptionChange = (i: number, key: INewOptionKeys, value: string | boolean) => {
         const changedOptions = options.value.map( (option, index) => {
             if(index === i) {
-                return { ...option, [key]: value };
+                return { ...option, [key]: { ...option[key], value } };
             }
             return { ...option, isCorrect: false};
         } )

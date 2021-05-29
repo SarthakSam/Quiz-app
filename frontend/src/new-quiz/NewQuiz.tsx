@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
-import { INewQuiz, INewOption, IServerError, IApiResponse, IQuizResponse, InputField, INewQuestion, INewQuizKeys, INewQuestionKeys } from '../quiz.types';
+import { INewQuiz, INewOption, IServerError, IApiResponse, IQuizResponse, InputField, INewQuestion, INewQuizKeys, INewQuestionKeys, IOption, INewOptionKeys } from '../quiz.types';
 import { NewQuestion } from './new-question/NewQuestion';
 import { getNewQuestionObject, getNewQuizObject, InputFieldObj } from './utils';
 import styles from './NewQuiz.module.css';
@@ -13,6 +13,7 @@ import { UseQuiz } from '../quiz-store/quiz.context';
 import { getUrl } from '../api.config';
 import { FormField } from '../form-field/FormField';
 import { useNotifications } from '../contexts/notifications-context';
+import { validateQuiz } from './form-rules';
 
 async function saveQuiz<T>(quiz: INewQuiz, category: string) : Promise<IApiResponse<T> | IServerError> {
     try {
@@ -33,55 +34,6 @@ async function saveQuiz<T>(quiz: INewQuiz, category: string) : Promise<IApiRespo
     }
 }
 
-const validateField = (field: InputField<string | number | INewQuestion[] | INewOption[] > | undefined, key: INewQuizKeys | INewQuestionKeys) => {
-    if( !field?.value ) {
-        return {
-                ...field,
-                isValid: false,
-                error: `${key} is mandatory`
-            }
-    }
-    return {
-        ...field,
-        isValid: true,
-        error: ''
-    };
-}
-
-const validateQuestion = (question: INewQuestion) => {
-    const validationFields: INewQuestionKeys[] = ["question", "points"];
-    return validationFields.reduce((question: INewQuestion, field: INewQuestionKeys) => {
-        const validationResult = validateField(question[field], field);
-        return {
-            ...question, 
-            [field]: validationResult,
-            isValid: validationResult.isValid && question.isValid
-        };
-    }, {...question, isValid: true});
-}
-
-const validateQuiz = (quiz: INewQuiz) => {
-    
-    let areAllQuestionsValid = true;
-    const questions: INewQuestion[] = quiz.questions.value.map( (question: INewQuestion) => {
-        const validatedResult = validateQuestion(question);
-        areAllQuestionsValid = areAllQuestionsValid && validatedResult.isValid;
-        return validatedResult;
-    });
-
-    const validatedQuiz: INewQuiz = { ...quiz, questions: { value: questions, isValid: areAllQuestionsValid, error: "Questions not valid" }};
-
-    const validationFields: INewQuizKeys[] = ["title", "image"];
-
-    return validationFields.reduce((quiz: INewQuiz, field: INewQuizKeys) => {
-        const validationResult = validateField(quiz[field], field);
-        return {
-            ...quiz, 
-            [field]: validationResult,
-            isValid: validationResult.isValid && quiz.isValid
-        };
-    }, {...validatedQuiz, isValid: true});
-}
 
 export function NewQuiz() {
     const [ quiz, setQuiz ] = useState<INewQuiz>( getNewQuizObject() );
@@ -123,7 +75,7 @@ export function NewQuiz() {
         setCategory( category => ({ ...category, isValid: !!category.value, error: !!category.value? '': 'Category is mandatory' }) );
 
         if(!validatedData.isValid || !category.isValid) {
-            showNotification({ type: 'WARNING', message: 'Some validtion errors are present. Please review them' })
+            showNotification({ type: 'WARNING', message: 'Some validation errors are present. Please review them' })
             return;
         }
 
@@ -149,9 +101,7 @@ export function NewQuiz() {
 
                 <div className={ `row ${styles.body}` }>
 
-                    {/* <div className="col-1"></div> */}
                     <Sidenav questions={ quiz.questions.value } activeIndex = { index } onSelect = { setIndex } addNewQuestion = { addNewQuestion } />
-                    {/* <div className="col-1"></div> */}
                     <div className={ `col-6 col-xl-7 col-sm-12 ${styles.form}` }>
                         {
                             index === -1?

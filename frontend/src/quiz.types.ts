@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export type IOption = {
     _id: string;
     name: string;
@@ -46,9 +48,11 @@ export type ICategory = {
 }
 
 export type INewOption = {
-    name: string;
-    isCorrect: boolean;
+    name: InputField<string>;
+    isCorrect: InputField<boolean>;
 }
+
+export type INewOptionKeys = "name" | "isCorrect";
 
 export type INewQuestion = {
     question: InputField<string>;
@@ -90,8 +94,8 @@ export type INewQuestionProps = {
 
 export type INewOptionProps = {
     radioFor: string;
-    name: string;
-    isCorrect: boolean;
+    name: InputField<string>;
+    isCorrect: InputField<boolean>;
     onChange: Function;
     index: number;
 }
