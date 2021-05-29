@@ -11,6 +11,8 @@ import { Question } from './question/Question';
 import { UseQuiz } from '../quiz-store/quiz.context';
 import { NextQuestion, ResetQuiz, InitializeQuiz } from '../quiz-store/quiz.reducer';
 import { getUrl } from '../api.config';
+import { UseAxios } from '../custom-hooks/useAxios';
+import { useNotifications } from '../contexts/notifications-context';
 
 async function getQuiz<T>(id: string): Promise<IApiResponse<T> | IServerError> {
     try {
@@ -33,10 +35,13 @@ export function Quiz() {
   const { state: { currentQuestion, answerStatus}, dispatch } = UseQuiz();
   const navigate = useNavigate();
   const { id } = useParams();
+  const { getData } = UseAxios();
+  const { showNotification } = useNotifications();
 
     useEffect( () => {
         (async () => {
-          const response = await getQuiz<IQuizResponse>(id);
+          // const response = await getQuiz<IQuizResponse>(id);
+          const response = await getData<IQuizResponse>( getUrl('specificQuizes', { id }) )
           if( "data" in response ) {
             const quizData = response.data.quiz
             console.log(quizData);
@@ -47,7 +52,8 @@ export function Quiz() {
            dispatch(new InitializeQuiz( { totalQuestions: quizData.questions.length, totalScore } ) );
 
           } else {
-            window.alert(response.message);
+            // window.alert(response.message);
+            showNotification({ type: 'ERROR', message: response.message })
           }
         })();
     }, [])

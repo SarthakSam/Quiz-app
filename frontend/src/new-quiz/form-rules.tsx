@@ -18,10 +18,12 @@ const validateField = (field: InputField<string | number | INewQuestion[] | INew
 const validateQuestion = (question: INewQuestion) => {
 
     let areAllOptionsValid = true;
+    let isRightAnswerSelected = false;
 
     const options: INewOption[] = question.options.value.map( ( option: INewOption ) => {
         const nameValidation = validateField( option.name, 'name' );
         areAllOptionsValid = nameValidation.isValid && areAllOptionsValid;
+        isRightAnswerSelected = isRightAnswerSelected || option.isCorrect.value;
         return {
             ...option,
             name: { 
@@ -35,8 +37,8 @@ const validateQuestion = (question: INewQuestion) => {
         ...question,
         options: {
             value: options,
-            isValid: areAllOptionsValid,
-            error: areAllOptionsValid? '' : 'Error in options'
+            isValid: areAllOptionsValid && isRightAnswerSelected,
+            error: areAllOptionsValid && isRightAnswerSelected? '' : 'Error in options'
         }
     }
 

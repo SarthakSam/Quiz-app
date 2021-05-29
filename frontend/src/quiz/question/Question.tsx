@@ -33,7 +33,7 @@ export function Question( { question: questionObj, status = "Not Answered" }: { 
                     questionObj.options.map( option => 
                     <li key = { option._id } className={ `row col-6 col-sm-12 p-0 ${ styles.option } 
                     ${ selectedOption === option._id? styles[optionClass] : '' } ` } onClick = { () => { optionSelected(option) } }>
-                        <p className="col-10 m-0" style={{ color: 'inherit' }}>{ option.name }</p>
+                        <p className="col-10 m-0" style={{ color: 'inherit', 'overflowWrap': 'break-word' }}>{ option.name }</p>
                         <div className="col-2 m-0"> 
                         {
                             status === 'Not Answered' && <div className={ styles.blank }></div>

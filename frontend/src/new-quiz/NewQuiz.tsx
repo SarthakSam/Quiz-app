@@ -14,25 +14,7 @@ import { getUrl } from '../api.config';
 import { FormField } from '../form-field/FormField';
 import { useNotifications } from '../contexts/notifications-context';
 import { validateQuiz } from './form-rules';
-
-async function saveQuiz<T>(quiz: any, category: string) : Promise<IApiResponse<T> | IServerError> {
-    try {
-        const resp = await axios.post<T>(getUrl('postQuiz'), {quiz, category});
-        return { data: resp.data, status: resp.status };
-    } catch(err) {
-        if(axios.isAxiosError(err)) {
-            const serverError = err as AxiosError<IServerError>;
-            if(serverError.response && serverError.response.data) {
-                return { ...serverError.response.data, status: serverError.response.status, };
-            }
-
-            if( err.response && err.response.data ) {
-                return err.response.data;
-            }
-        }
-        return { message: "Something went wrong", status: 400 };
-    }
-}
+import { UseAxios } from '../custom-hooks/useAxios';
 
 export function NewQuiz() {
     const [ quiz, setQuiz ] = useState<INewQuiz>( getNewQuizObject() );
@@ -42,6 +24,7 @@ export function NewQuiz() {
     const { state: { categories: options } } = UseQuiz();
     const navigate = useNavigate();
     const { showNotification } = useNotifications();
+    const { postData } = UseAxios();
 
     console.log({quiz});
 
@@ -78,13 +61,15 @@ export function NewQuiz() {
             return;
         }
 
-        const resp = await saveQuiz<IQuizResponse>(parseQuizData(quiz), category.value);
+        const resp = await postData<IQuizResponse>(getUrl('postQuiz'), { quiz: parseQuizData(quiz) ,category: category.value });
+
+        // const resp = await saveQuiz<IQuizResponse>(parseQuizData(quiz), category.value);
         if( "data" in resp ) {
-            // console.log("Quiz created successfully");
+            showNotification({ type: 'SUCCESS', message: 'Quiz created successfully' });
             navigate('/');
         }
          else {
-             window.alert(resp.message);
+            showNotification({ type: 'ERROR', message: resp.message });
          }
     }
 
