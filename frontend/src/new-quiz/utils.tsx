@@ -38,3 +38,34 @@ export function getNewOptionObject(): INewOption {
         isCorrect: new InputFieldObj(false)
     }
 }
+
+export function parseQuizData(quiz: INewQuiz) {
+    return {
+        title: quiz.title.value,
+        image: quiz.image.value,
+        description: quiz.description.value,
+        questions: parseQuestions( quiz.questions.value ),
+    }
+}
+
+function parseQuestions( questions: INewQuestion[] ) {
+    return questions.map( (questionObj: INewQuestion) => (
+        {
+            question: questionObj.question.value,
+            options: parseOptions(questionObj.options.value),
+            points: questionObj.points.value,
+            negativePoints: questionObj.negativePoints?.value,
+            explanation: questionObj.explanation?.value,
+            isValid: true
+        }
+    ) ); 
+}
+
+function parseOptions( options: INewOption[] ) {
+    return options.map( (optionObj: INewOption) => (
+        {
+            name: optionObj.name.value,
+            isCorrect: optionObj.isCorrect.value,
+        }
+    ) ); 
+}

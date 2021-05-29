@@ -3,9 +3,9 @@ import { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
-import { INewQuiz, INewOption, IServerError, IApiResponse, IQuizResponse, InputField, INewQuestion, INewQuizKeys, INewQuestionKeys, IOption, INewOptionKeys } from '../quiz.types';
+import { INewQuiz, INewOption, IServerError, IApiResponse, IQuizResponse, INewQuestion, INewQuizKeys, INewQuestionKeys } from '../quiz.types';
 import { NewQuestion } from './new-question/NewQuestion';
-import { getNewQuestionObject, getNewQuizObject, InputFieldObj } from './utils';
+import { getNewQuestionObject, getNewQuizObject, InputFieldObj, parseQuizData } from './utils';
 import styles from './NewQuiz.module.css';
 import { Sidenav } from './sidenav/Sidenav';
 import { NewCategory } from './new-category/NewCategory';
@@ -15,7 +15,7 @@ import { FormField } from '../form-field/FormField';
 import { useNotifications } from '../contexts/notifications-context';
 import { validateQuiz } from './form-rules';
 
-async function saveQuiz<T>(quiz: INewQuiz, category: string) : Promise<IApiResponse<T> | IServerError> {
+async function saveQuiz<T>(quiz: any, category: string) : Promise<IApiResponse<T> | IServerError> {
     try {
         const resp = await axios.post<T>(getUrl('postQuiz'), {quiz, category});
         return { data: resp.data, status: resp.status };
@@ -33,7 +33,6 @@ async function saveQuiz<T>(quiz: INewQuiz, category: string) : Promise<IApiRespo
         return { message: "Something went wrong", status: 400 };
     }
 }
-
 
 export function NewQuiz() {
     const [ quiz, setQuiz ] = useState<INewQuiz>( getNewQuizObject() );
@@ -79,7 +78,7 @@ export function NewQuiz() {
             return;
         }
 
-        const resp = await saveQuiz<IQuizResponse>(quiz, category.value);
+        const resp = await saveQuiz<IQuizResponse>(parseQuizData(quiz), category.value);
         if( "data" in resp ) {
             // console.log("Quiz created successfully");
             navigate('/');
