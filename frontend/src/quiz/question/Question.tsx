@@ -54,6 +54,10 @@ export function Question( { question: questionObj, status = "Not Answered" }: { 
                     </li>)
                 }
             </ul>
+            {
+              questionObj?.explanation &&  status !== 'Not Answered' && <h3 className={ styles.question } >EXPLANATION: { questionObj?.explanation }</h3>
+            }
+
         </div>
     )
 }

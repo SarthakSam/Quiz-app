@@ -2,7 +2,8 @@
     /* background: #e0acbb1a; */
     background: var(--blue-background1);
     padding: 1em;
-    height: 100%;
+    height: fit-content;
+    min-height: 100vh;
     display: flex;
     justify-content: space-around;
 }
