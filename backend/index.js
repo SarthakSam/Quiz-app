@@ -11,7 +11,7 @@ const localDbURL = 'mongodb://localhost:27017/quiz'
 const prodDbURL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.ueoao.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 
-mongoose.connect(localDbURL, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(prodDbURL, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => { console.log(" DB connected") })
 .catch(err => console.log(err));
 
